@@ -1,0 +1,12 @@
+/* src/components/Footer.css */
+
+.footer {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    background-color: #111;
+    padding: 10px 0;
+}

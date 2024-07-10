@@ -1,0 +1,17 @@
+/* src/pages/Home.css */
+
+.home {
+    margin-left: 200px; /* Espaço para o menu lateral */
+    padding: 20px;
+    background-color: #1a1a1a; /* Cinza escuro quase preto */
+    color: white;
+    min-height: 100vh;
+}
+
+.home h1 {
+    color: #ff00ff;
+}
+
+.home p {
+    color: #00ffff;
+}

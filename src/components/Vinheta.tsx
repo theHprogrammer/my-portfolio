@@ -1,6 +1,7 @@
 // src/components/Vinheta.tsx
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Vinheta.css';
 import programmerImage from '../assets/THEHPROGRAMMER.png';
 import secondImage from '../assets/me.jpg';
@@ -8,6 +9,7 @@ import secondImage from '../assets/me.jpg';
 const Vinheta: React.FC = () => {
     const [isFirstImage, setIsFirstImage] = useState(true);
     const [isLoaded, setIsLoaded] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -22,17 +24,19 @@ const Vinheta: React.FC = () => {
         }, 500); // Delay for the loading effect
     }, []);
 
+    const handlePortfolioClick = () => {
+        navigate('/home'); // Navega para a página inicial
+    };
+
     return (
         <div className={`animated-background ${isLoaded ? 'loaded' : ''}`}>
-            <div className="header">
-                <h1 className="welcome-text">Welcome dear visitor</h1>
-            </div>
+            <h1 className="welcome-text">Welcome dear visitor</h1>
             <div className="center-column">
                 <svg className="circle-text" viewBox="0 0 300 300">
                     <path id="circlePath" d="M 150, 150 m -125, 0 a 125,125 0 1,1 250,0 a 125,125 0 1,1 -250,0" />
                     <text>
                         <textPath href="#circlePath" startOffset="0%">
-                            -----#----- theHprogrammer -----#----- Helder -----#----- theHprogrammer -----#----- Helder --
+                            - - - - - theHprogrammer - - - - - - - - - -  Helder - - - - - - - theHprogrammer - - - - - - - - - -  Helder - - - - -
                         </textPath>
                     </text>
                 </svg>
@@ -40,8 +44,8 @@ const Vinheta: React.FC = () => {
                     <img src={isFirstImage ? programmerImage : secondImage} alt="The H Programmer" />
                 </div>
             </div>
-            <div className="footer">
-                <button className="portfolio-button">Access my Portfolio</button>
+            <div className="button-portfolio">
+                <button className="portfolio-button" onClick={handlePortfolioClick}>Access my Portfolio</button>
             </div>
         </div>
     );
