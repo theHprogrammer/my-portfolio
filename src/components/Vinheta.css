@@ -14,7 +14,7 @@
 
 .animated-background {
     width: 100%;
-    height: 100vh;      
+    height: 100vh;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -54,16 +54,17 @@
     z-index: 4;
     font-size: 36px;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow */
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
     margin-bottom: 20px;
-    opacity: 0; /* Initial state for loading animation */
-    transform: translateY(-20px); /* Initial state for loading animation */
-    transition: opacity 1s ease-out, transform 1s ease-out 0.5s; /* Transition for loading effect */
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 1s ease-out, transform 1s ease-out 0.5s;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .animated-background.loaded .welcome-text {
-    opacity: 1; /* Final state for loading animation */
-    transform: translateY(0); /* Final state for loading animation */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .center-column {
@@ -73,15 +74,15 @@
     align-items: center;
     justify-content: center;
     z-index: 3;
-    gap: 20px; /* Add space between elements */
-    opacity: 0; /* Initial state for loading animation */
-    transform: translateY(20px); /* Initial state for loading animation */
-    transition: opacity 1s ease-out, transform 1s ease-out 0.7s; /* Transition for loading effect */
+    gap: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out 0.7s;
 }
 
 .animated-background.loaded .center-column {
-    opacity: 1; /* Final state for loading animation */
-    transform: translateY(0); /* Final state for loading animation */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .content-circle {
@@ -111,16 +112,16 @@
 }
 
 .button-portfolio {
-    margin-top: 20px; /* Space above the footer */
+    margin-top: 20px;
     z-index: 3;
-    opacity: 0; /* Initial state for loading animation */
-    transform: translateY(20px); /* Initial state for loading animation */
-    transition: opacity 1s ease-out, transform 1s ease-out 0.9s; /* Transition for loading effect */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out 0.9s;
 }
 
 .animated-background.loaded .button-portfolio {
-    opacity: 1; /* Final state for loading animation */
-    transform: translateY(0); /* Final state for loading animation */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .circle-text {
@@ -137,6 +138,7 @@
 text {
     font-size: 18px;
     fill: white;
+    font-family: 'Orbitron', sans-serif;
 }
 
 @keyframes rotate {
@@ -171,8 +173,9 @@ text {
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
     text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    font-family: 'Orbitron', sans-serif;
 }
 
 .portfolio-button:hover {
@@ -238,7 +241,6 @@ text {
         width: 300px;
         height: 300px;
     }
-
 
     .portfolio-button {
         font-size: 12px;

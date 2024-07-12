@@ -1,23 +1,43 @@
 /* src/transitions.css */
 
-.slide-enter {
+/* Transições de deslize para cima */
+.slide-up-enter {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateY(100%);
 }
 
-.slide-enter-active {
+.slide-up-enter-active {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
     transition: opacity 500ms, transform 500ms;
 }
 
-.slide-exit {
+.slide-up-exit {
     opacity: 1;
-    transform: translateX(0);
 }
 
-.slide-exit-active {
+.slide-up-exit-active {
     opacity: 0;
-    transform: translateX(-100%);
+    transition: opacity 500ms;
+}
+
+/* Transições de deslize para baixo */
+.slide-down-enter {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+.slide-down-enter-active {
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 500ms, transform 500ms;
+}
+
+.slide-down-exit {
+    opacity: 1;
+}
+
+.slide-down-exit-active {
+    opacity: 0;
+    transition: opacity 500ms;
 }

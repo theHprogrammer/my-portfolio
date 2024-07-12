@@ -36,7 +36,7 @@ const Vinheta: React.FC = () => {
                     <path id="circlePath" d="M 150, 150 m -125, 0 a 125,125 0 1,1 250,0 a 125,125 0 1,1 -250,0" />
                     <text>
                         <textPath href="#circlePath" startOffset="0%">
-                            - - - - - theHprogrammer - - - - - - - - - -  Helder - - - - - - - theHprogrammer - - - - - - - - - -  Helder - - - - -
+                            - - - - - theHprogrammer - - - - - - Helder - - - - - theHprogrammer - - - - - Helder
                         </textPath>
                     </text>
                 </svg>

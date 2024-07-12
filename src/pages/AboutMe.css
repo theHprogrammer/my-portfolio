@@ -1,28 +1,28 @@
-/* src/pages/Home.css */
+/* src/pages/AboutMe.css */
 
-.home {
-    margin-left: 220px; /* Espaço para o menu lateral */
+.about-me {
+    margin-left: 220px; /* Espaço para a sidebar */
     padding: 20px;
     background-color: #1a1a1a; /* Cinza escuro quase preto */
     color: white;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    justify-content: center;
     font-family: 'Orbitron', sans-serif;
 }
 
-.home h1 {
+.about-me h1 {
     color: #ff00ff;
     text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-    font-size: 3rem;
     margin-bottom: 20px;
+    font-size: 3rem;
 }
 
-.home p {
+.about-me p {
     color: #00ffff;
     text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
     font-size: 1.5rem;
+    text-align: center;
 }
