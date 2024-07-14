@@ -1,7 +1,7 @@
 // src/pages/AboutMe.tsx
 
 import React from 'react';
-import './AboutMe.css';
+import '../styles/AboutMe.css';
 
 const AboutMe: React.FC = () => {
     return (

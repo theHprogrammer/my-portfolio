@@ -1,5 +1,5 @@
 import React from 'react';
-import './Contact.css';
+import '../styles/Contact.css';
 import ContactCard from '../components/ContactCard';
 import linkedinLogo from '../assets/linkedin.png';
 import githubLogo from '../assets/github.png';

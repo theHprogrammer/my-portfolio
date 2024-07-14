@@ -1,5 +1,5 @@
 import React from 'react';
-import './ContactCard.css';
+import '../styles/ContactCard.css';
 
 interface ContactCardProps {
     title: string;

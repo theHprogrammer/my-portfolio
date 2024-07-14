@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Vinheta.css';
+import '../styles/Vinheta.css';
 import programmerImage from '../assets/THEHPROGRAMMER.png';
 import secondImage from '../assets/me.jpg';
 

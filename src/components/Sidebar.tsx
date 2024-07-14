@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import './Sidebar.css';
+import '../styles/Sidebar.css';
 
 const Sidebar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -22,10 +22,10 @@ const Sidebar: React.FC = () => {
                     <ul>
                         <li><NavLink to="/home" end>Home</NavLink></li>
                         <li><NavLink to="/about">About Me</NavLink></li>
-                        <li><NavLink to="#">Academic</NavLink></li>
-                        <li><NavLink to="#">Professional</NavLink></li>
-                        <li><NavLink to="#">Projects</NavLink></li>
-                        <li><NavLink to="#">Certifications</NavLink></li>
+                        <li><NavLink to="/academic">Academic</NavLink></li>
+                        <li><NavLink to="/professional">Professional</NavLink></li>
+                        <li><NavLink to="/projects">Projects</NavLink></li>
+                        <li><NavLink to="/certifications">Certifications</NavLink></li>
                         <li><NavLink to="/contact">Contact</NavLink></li>
                     </ul>
                 </nav>

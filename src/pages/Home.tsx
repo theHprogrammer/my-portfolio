@@ -1,7 +1,7 @@
 // src/pages/Home.tsx
 
 import React from 'react';
-import './Home.css';
+import '../styles/Home.css';
 
 const Home: React.FC = () => {
     return (

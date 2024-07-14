@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Home from './pages/Home';
 import AboutMe from './pages/AboutMe';
-// import Academic from './pages/Academic';
-// import Professional from './pages/Professional';
-// import Projects from './pages/Projects';
-// import Certifications from './pages/Certifications';
+import Academic from './pages/Academic';
+import Professional from './pages/Professional';
+import Projects from './pages/Projects';
+import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
@@ -67,10 +67,10 @@ const Main: React.FC = () => {
                         <Route path="/" element={<Vinheta />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/about" element={<AboutMe />} />
-                        {/* <Route path="/academic" element={<Academic />} />
+                        <Route path="/academic" element={<Academic />} />
                         <Route path="/professional" element={<Professional />} />
                         <Route path="/projects" element={<Projects />} />
-                        <Route path="/certifications" element={<Certifications />} /> */}
+                        <Route path="/certifications" element={<Certifications />} />
                         <Route path="/contact" element={<Contact />} />
                     </Routes>
                 </CSSTransition>
