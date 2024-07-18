@@ -1,11 +1,14 @@
 import React from 'react';
-import '../styles/Professional.css';
+import ProfessionalTimeline from '../components/ProfessionalTimeline';
+import { useSidebar } from '../context/SidebarContext';
 
 const Professional: React.FC = () => {
+    const { isSidebarOpen } = useSidebar();
+
     return (
-        <div className="professional">
-            <h1>Professional Experience</h1>
-            <p>This is the Professional Experience page.</p>
+        <div className={`flex flex-col items-center p-5 ${isSidebarOpen ? 'lg:ml-[220px]' : ''}`}>
+            <h1 className="text-5xl font-bold mb-20 text-fuchsia-600 text-shadow-fuchsia">Professional History</h1>
+            <ProfessionalTimeline />
         </div>
     );
 }

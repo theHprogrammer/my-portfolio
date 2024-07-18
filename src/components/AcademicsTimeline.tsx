@@ -2,34 +2,34 @@ import React from 'react';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { FaUniversity, FaSchool } from 'react-icons/fa';
-import '../styles/AcademicsTimeline.css';
+import './Timeline.css';
 
 const academicHistory = [
     {
-        yearRange: '2021 - Now',
+        yearRange: '2021 - Present',
         institution: 'UFSC - Federal University of Santa Catarina',
         course: 'Computer Engineering Undergraduate',
-        local: 'Araranguá - SC',
-        note: 'Academic Performance Index: 8.79'
+        location: 'Araranguá, Santa Catarina, Brazil',
+        note: 'Academic Performance Index: 8.80'
     },
     {
         yearRange: '2018 - 2020 (Interrupted for external transfer)',
         institution: 'UNESP - São Paulo State University "Júlio de Mesquita Filho"',
         course: 'Civil Engineering Undergraduate',
-        local: 'Ilha Solteira - SP',
+        location: 'Ilha Solteira, São Paulo, Brazil',
         note: 'Academic Performance Index: 7.69'
     },
     {
         yearRange: '2016 - 2017',
         institution: 'Etec Philadelpho Gouvêa Netto',
         course: 'Technical in Building Construction',
-        local: 'São José do Rio Preto - SP',
+        location: 'São José do Rio Preto, São Paulo, Brazil',
         note: 'Technical in Building Construction, with a professional technical qualification of medium level as an Assistant Technician in Building Installations'
     },
     {
         yearRange: '2013 - 2015',
         institution: 'E.E. Profª Amira Homsi Chalella',
-        local: 'São José do Rio Preto - SP',
+        location: 'São José do Rio Preto, São Paulo, Brazil',
         course: 'High School'
     }
 ];
@@ -49,7 +49,7 @@ const AcademicsTimeline: React.FC = () => {
                     <h3 className="vertical-timeline-element-title">{item.course}</h3>
                     <h4 className="vertical-timeline-element-subtitle">{item.institution}</h4>
                     
-                    {item.local && <p>{item.local}</p>}
+                    {item.location && <p>{item.location}</p>}
                     {item.note && <p>{item.note}</p>}
                 </VerticalTimelineElement>
             ))}

@@ -1,3 +1,5 @@
+// src/App.tsx
+
 import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
@@ -11,6 +13,7 @@ import Contact from './pages/Contact';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Vinheta from './components/Vinheta';
+import { SidebarProvider } from './context/SidebarContext';
 import './App.css';
 import './transitions.css';
 
@@ -28,7 +31,9 @@ const routesOrder = [
 const App: React.FC = () => {
     return (
         <Router>
-            <Main />
+            <SidebarProvider>
+                <Main />
+            </SidebarProvider>
         </Router>
     );
 }
@@ -57,24 +62,26 @@ const Main: React.FC = () => {
     return (
         <div className="app">
             {location.pathname !== '/' && <Sidebar />}
-            <SwitchTransition>
-                <CSSTransition
-                    key={location.pathname}
-                    classNames={transitionClass}
-                    timeout={500}
-                >
-                    <Routes location={location}>
-                        <Route path="/" element={<Vinheta />} />
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/about" element={<AboutMe />} />
-                        <Route path="/academic" element={<Academic />} />
-                        <Route path="/professional" element={<Professional />} />
-                        <Route path="/projects" element={<Projects />} />
-                        <Route path="/certifications" element={<Certifications />} />
-                        <Route path="/contact" element={<Contact />} />
-                    </Routes>
-                </CSSTransition>
-            </SwitchTransition>
+            <div className="content flex-grow">
+                <SwitchTransition>
+                    <CSSTransition
+                        key={location.pathname}
+                        classNames={transitionClass}
+                        timeout={500}
+                    >
+                        <Routes location={location}>
+                            <Route path="/" element={<Vinheta />} />
+                            <Route path="/home" element={<Home />} />
+                            <Route path="/about" element={<AboutMe />} />
+                            <Route path="/academic" element={<Academic />} />
+                            <Route path="/professional" element={<Professional />} />
+                            <Route path="/projects" element={<Projects />} />
+                            <Route path="/certifications" element={<Certifications />} />
+                            <Route path="/contact" element={<Contact />} />
+                        </Routes>
+                    </CSSTransition>
+                </SwitchTransition>
+            </div>
             {location.pathname !== '/' && <Footer />}
         </div>
     );
