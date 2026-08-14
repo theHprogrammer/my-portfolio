@@ -1,132 +1,145 @@
-import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSidebar } from '../context/SidebarContext';
+import React, { useEffect, useState } from 'react';
+import { FaBars, FaGithub, FaXmark } from 'react-icons/fa6';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
+
+interface NavigationListProps {
+    onNavigate?: () => void;
+}
+
+const navigationItems = [
+    { to: '/home', label: 'Home' },
+    { to: '/about', label: 'About me' },
+    { to: '/academic', label: 'Academic' },
+    { to: '/professional', label: 'Professional' },
+    { to: '/projects', label: 'Projects' },
+    { to: '/certifications', label: 'Certifications' },
+    { to: '/contact', label: 'Contact' },
+];
+
+const NavigationList: React.FC<NavigationListProps> = ({ onNavigate }) => {
+    return (
+        <nav aria-label="Primary navigation">
+            <ul className="space-y-1">
+                {navigationItems.map((item) => (
+                    <li key={item.to}>
+                        <NavLink
+                            to={item.to}
+                            className={({ isActive }) => `flex min-h-11 items-center rounded-xl px-4 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
+                                isActive
+                                    ? 'bg-brand-soft text-brand-strong'
+                                    : 'text-muted hover:bg-soft hover:text-ink'
+                            }`}
+                            onClick={onNavigate}
+                        >
+                            {item.label}
+                        </NavLink>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    );
+};
+
+const Brand: React.FC = () => {
+    return (
+        <Link
+            to="/home"
+            className="flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+            aria-label="Helder Henrique, home"
+        >
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-action text-sm font-bold text-white">H.</span>
+            <span>
+                <span className="block text-sm font-bold text-ink">Helder Henrique</span>
+                <span className="block text-xs text-muted">Computer Engineer</span>
+            </span>
+        </Link>
+    );
+};
 
 const Sidebar: React.FC = () => {
-    const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
+    const location = useLocation();
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
 
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth > 768) {
-                if (!isSidebarOpen) toggleSidebar();
-            } else {
-                if (isSidebarOpen) closeSidebar();
+        setIsMobileOpen(false);
+    }, [location.pathname]);
+
+    useEffect(() => {
+        if (!isMobileOpen) {
+            return undefined;
+        }
+
+        const handleEscape = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setIsMobileOpen(false);
             }
         };
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [isSidebarOpen, toggleSidebar, closeSidebar]);
-
-    const handleNavLinkClick = () => {
-        if (window.innerWidth <= 768) {
-            closeSidebar();
-        }
-    };
+        document.addEventListener('keydown', handleEscape);
+        return () => document.removeEventListener('keydown', handleEscape);
+    }, [isMobileOpen]);
 
     return (
         <>
-            <button
-                type="button"
-                className={`fixed top-4 left-4 z-50 flex flex-col justify-around items-center w-8 h-8 bg-transparent border-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 ${isSidebarOpen ? 'open' : ''}`}
-                onClick={toggleSidebar}
-                aria-label={isSidebarOpen ? 'Close navigation menu' : 'Open navigation menu'}
-                aria-expanded={isSidebarOpen}
-                aria-controls="primary-navigation"
-            >
-                <span className={`block w-full h-1 bg-fuchsia-400 rounded transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'transform translate-y-2 rotate-45' : ''}`}></span>
-                <span className={`block w-full h-1 bg-fuchsia-400 rounded transition-opacity duration-300 ease-in-out ${isSidebarOpen ? 'opacity-0' : ''}`}></span>
-                <span className={`block w-full h-1 bg-fuchsia-400 rounded transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'transform -translate-y-2 -rotate-45' : ''}`}></span>
-            </button>
-            <div
-                id="primary-navigation"
-                className={`fixed top-0 left-0 sidebar bg-gray-950 text-white flex flex-col items-center pt-14 transform transition-transform duration-300 ease-in-out z-40 neon-border ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
-            >
-                <h2 className="mb-10 text-fuchsia-600 font-orbitron text-3xl font-bold text-shadow-fuchsia">Menu</h2>
-                <nav>
-                    <ul className="list-none p-0">
-                        <li className="mb-4">
-                            <NavLink
-                                to="/home"
-                                className={({ isActive }) =>
-                                    isActive ? 'text-fuchsia-600 text-shadow-fuchsia' : 'text-cyan-300 hover:text-fuchsia-600 text-shadow-cyan'
-                                }
-                                onClick={handleNavLinkClick}
-                            >
-                                Home
-                            </NavLink>
-                        </li>
-                        <li className="mb-4">
-                            <NavLink
-                                to="/about"
-                                className={({ isActive }) =>
-                                    isActive ? 'text-fuchsia-600 text-shadow-fuchsia' : 'text-cyan-300 hover:text-fuchsia-600 text-shadow-cyan'
-                                }
-                                onClick={handleNavLinkClick}
-                            >
-                                About Me
-                            </NavLink>
-                        </li>
-                        <li className="mb-4">
-                            <NavLink
-                                to="/academic"
-                                className={({ isActive }) =>
-                                    isActive ? 'text-fuchsia-600 text-shadow-fuchsia' : 'text-cyan-300 hover:text-fuchsia-600 text-shadow-cyan'
-                                }
-                                onClick={handleNavLinkClick}
-                            >
-                                Academic
-                            </NavLink>
-                        </li>
-                        <li className="mb-4">
-                            <NavLink
-                                to="/professional"
-                                className={({ isActive }) =>
-                                    isActive ? 'text-fuchsia-600 text-shadow-fuchsia' : 'text-cyan-300 hover:text-fuchsia-600 text-shadow-cyan'
-                                }
-                                onClick={handleNavLinkClick}
-                            >
-                                Professional
-                            </NavLink>
-                        </li>
-                        <li className="mb-4">
-                            <NavLink
-                                to="/projects"
-                                className={({ isActive }) =>
-                                    isActive ? 'text-fuchsia-600 text-shadow-fuchsia' : 'text-cyan-300 hover:text-fuchsia-600 text-shadow-cyan'
-                                }
-                                onClick={handleNavLinkClick}
-                            >
-                                Projects
-                            </NavLink>
-                        </li>
-                        <li className="mb-4">
-                            <NavLink
-                                to="/certifications"
-                                className={({ isActive }) =>
-                                    isActive ? 'text-fuchsia-600 text-shadow-fuchsia' : 'text-cyan-300 hover:text-fuchsia-600 text-shadow-cyan'
-                                }
-                                onClick={handleNavLinkClick}
-                            >
-                                Certifications
-                            </NavLink>
-                        </li>
-                        <li className="mb-4">
-                            <NavLink
-                                to="/contact"
-                                className={({ isActive }) =>
-                                    isActive ? 'text-fuchsia-600 text-shadow-fuchsia' : 'text-cyan-300 hover:text-fuchsia-600 text-shadow-cyan'
-                                }
-                                onClick={handleNavLinkClick}
-                            >
-                                Contact
-                            </NavLink>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 flex-col border-r border-line bg-surface px-6 py-7 lg:flex">
+                <Brand />
+                <div className="mt-10 flex-1">
+                    <p className="mb-3 px-4 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted">
+                        Explore
+                    </p>
+                    <NavigationList />
+                </div>
+                <div className="space-y-3 border-t border-line pt-5">
+                    <ThemeToggle showLabel />
+                    <a
+                        href="https://github.com/theHprogrammer"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex min-h-11 items-center gap-2 rounded-xl px-3 text-sm font-semibold text-muted transition-colors hover:bg-soft hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                    >
+                        <FaGithub aria-hidden="true" />
+                        GitHub profile
+                    </a>
+                </div>
+            </aside>
+
+            <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-line bg-surface/95 px-4 backdrop-blur lg:hidden">
+                <Brand />
+                <div className="flex items-center gap-2">
+                    <ThemeToggle />
+                    <button
+                        type="button"
+                        className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-surface text-ink transition-colors hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                        onClick={() => setIsMobileOpen((currentValue) => !currentValue)}
+                        aria-label={isMobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                        aria-expanded={isMobileOpen}
+                        aria-controls="mobile-navigation"
+                    >
+                        {isMobileOpen ? <FaXmark aria-hidden="true" /> : <FaBars aria-hidden="true" />}
+                    </button>
+                </div>
+            </header>
+
+            {isMobileOpen ? (
+                <>
+                    <button
+                        type="button"
+                        className="fixed inset-0 z-40 bg-slate-950/30 backdrop-blur-sm lg:hidden"
+                        onClick={() => setIsMobileOpen(false)}
+                        aria-label="Close navigation menu"
+                        tabIndex={-1}
+                    />
+                    <div
+                        id="mobile-navigation"
+                        className="fixed inset-x-4 top-20 z-50 rounded-2xl border border-line bg-surface p-4 shadow-soft lg:hidden"
+                    >
+                        <NavigationList onNavigate={() => setIsMobileOpen(false)} />
+                    </div>
+                </>
+            ) : null}
         </>
     );
-}
+};
 
 export default Sidebar;

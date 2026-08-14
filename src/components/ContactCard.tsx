@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
 
 interface ContactCardProps {
     title: string;
@@ -8,14 +9,25 @@ interface ContactCardProps {
 
 const ContactCard: React.FC<ContactCardProps> = ({ title, image, link }) => {
     return (
-        <a href={link} target="_blank" rel="noopener noreferrer" className="no-underline">
-            <div className="bg-gray-900 border-2 border-fuchsia-400 rounded-lg shadow-lg p-5 w-40 h-56 text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col items-center justify-between">
-                <h2 className="text-fuchsia-600 text-xl mb-2 text-shadow-fuchsia">{title}</h2>
-                <img src={image} alt={title} className="w-20 h-20 object-contain mb-2" />
-                <p className="text-cyan-300 text-base text-shadow-cyan transition-transform duration-300 hover:scale-110">Clique aqui</p>
+        <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group surface-card flex min-h-40 flex-col justify-between p-5 transition-transform hover:-translate-y-1 hover:border-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+            aria-label={`${title}, opens in a new tab`}
+        >
+            <div className="flex items-start justify-between gap-4">
+                <span className="grid h-14 w-14 place-items-center rounded-xl bg-soft">
+                    <img src={image} alt="" width="40" height="40" className="h-10 w-10 object-contain" loading="lazy" />
+                </span>
+                <FaArrowUpRightFromSquare className="text-sm text-muted transition-colors group-hover:text-brand" aria-hidden="true" />
+            </div>
+            <div>
+                <h2 className="font-bold text-ink">{title}</h2>
+                <p className="mt-1 text-sm text-muted">Open profile</p>
             </div>
         </a>
     );
-}
+};
 
 export default ContactCard;

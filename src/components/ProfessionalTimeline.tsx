@@ -1,132 +1,84 @@
 import React from 'react';
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import 'react-vertical-timeline-component/style.min.css';
 import { FaBriefcase } from 'react-icons/fa';
-import './Timeline.css';
+import Timeline, { TimelineItem } from './Timeline';
 
-const professionalHistory = [
+const professionalHistory: TimelineItem[] = [
     {
-        yearRange: 'Nov 2023 - Present',
+        date: 'Nov 2023 — Present',
         title: 'P&D Analytics2AI',
-        position: 'Research & Development',
-        institution: 'Liga Acadêmica de Inteligência Artificial',
+        subtitle: 'Research & Development · Liga Acadêmica de Inteligência Artificial',
         location: 'Araranguá, Santa Catarina, Brazil',
         description: [
             'Study group focused on business consultancy.',
-            'Research and development of techniques, methods, and tools for data analysis, machine learning, and artificial intelligence.'
-        ]
+            'Research and development of techniques, methods and tools for data analysis, machine learning and artificial intelligence.',
+        ],
+        icon: <FaBriefcase aria-hidden="true" />,
     },
     {
-        yearRange: 'Mar 2023 - Mar 2024',
+        date: 'Mar 2023 — Mar 2024',
         title: 'Mobile Developer (Flutter)',
-        position: 'Intern',
-        institution: 'Medical AI',
+        subtitle: 'Intern · Medical AI',
         location: 'Araranguá, Santa Catarina, Brazil',
         description: [
-            'Assist in the development of mobile applications.',
-            'Register information in the system.',
-            'Perform system development tests.',
-            'Research and development of Expert and Generative AI for medication recommendation.'
-        ]
+            'Assisted in the development and testing of mobile applications.',
+            'Researched expert and generative AI for medication recommendation.',
+        ],
+        icon: <FaBriefcase aria-hidden="true" />,
     },
     {
-        yearRange: 'Dec 2021 - Sep 2022',
+        date: 'Dec 2021 — Sep 2022',
         title: 'Team Manager and Designer',
-        position: 'Scholar',
-        institution: 'LabTeC - Computational Technologies Laboratory - UFSC',
+        subtitle: 'Scholar · LabTeC — Computational Technologies Laboratory, UFSC',
         location: 'Araranguá, Santa Catarina, Brazil',
         description: [
-            'Team management:',
-            'Organization of meetings;',
-            'Monitoring of activities by team;',
-            'Description of agendas and meeting minutes via Trello;',
-            'Support in general activities.',
-            'Designer:',
-            'Creation of items for project objects;',
-            'Image processing.'
-        ]
+            'Organized meetings, monitored team activities and documented agendas and minutes.',
+            'Created project assets and worked with image processing.',
+        ],
+        icon: <FaBriefcase aria-hidden="true" />,
     },
     {
-        yearRange: 'Dec 2021 - Jan 2023',
+        date: 'Dec 2021 — Jan 2023',
         title: 'Consultant',
-        position: 'Voluntary',
-        institution: 'EJEC - Junior Enterprise of Computer Engineering',
+        subtitle: 'Volunteer · EJEC — Junior Enterprise of Computer Engineering',
         location: 'Araranguá, Santa Catarina, Brazil',
-        description: [
-            'Consultancy/Advice in general management activities.'
-        ]
+        description: ['Consultancy and advisory support in general management activities.'],
+        icon: <FaBriefcase aria-hidden="true" />,
     },
     {
-        yearRange: 'Jun 2021 - Dec 2021',
+        date: 'Jun 2021 — Dec 2021',
         title: 'Project Manager',
-        position: 'Voluntary',
-        institution: 'EJEC - Junior Enterprise of Computer Engineering',
+        subtitle: 'Volunteer · EJEC — Junior Enterprise of Computer Engineering',
         location: 'Araranguá, Santa Catarina, Brazil',
         description: [
-            'Participation in Board Meetings with the application of adapted SCRUM methodology;',
-            'Management of the Project Pipefy (Backlog via Pipefy - adapted for projects);',
-            'Team Management;',
-            'Project Management;',
-            'Knowledge Management;',
-            'Activities related to the role of Project Advisor.'
-        ]
+            'Managed projects, teams, knowledge and the project pipeline using an adapted Scrum methodology.',
+            'Participated in board meetings and supported project advisory activities.',
+        ],
+        icon: <FaBriefcase aria-hidden="true" />,
     },
     {
-        yearRange: 'Feb 2021 - Jun 2021',
+        date: 'Feb 2021 — Jun 2021',
         title: 'Project Advisor',
-        position: 'Voluntary',
-        institution: 'EJEC - Junior Enterprise of Computer Engineering',
+        subtitle: 'Volunteer · EJEC — Junior Enterprise of Computer Engineering',
         location: 'Araranguá, Santa Catarina, Brazil',
         description: [
-            'Participation in fixed activities following the adapted SCRUM methodology.',
-            'Development of Feedbacks;',
-            'Collection of Functional, Non-Functional Requirements, and Business Rules;',
-            'Development of Scopes;',
-            'Meetings with Project Stakeholders;',
-            'Monitoring of projects under development;',
-            'Research on innovation.'
-        ]
+            'Collected requirements and business rules, developed scopes and met with project stakeholders.',
+            'Monitored active projects and researched opportunities for innovation.',
+        ],
+        icon: <FaBriefcase aria-hidden="true" />,
     },
     {
-        yearRange: 'Aug 2016 - Aug 2017',
+        date: 'Aug 2016 — Aug 2017',
         title: 'Project Intern',
-        position: 'Intern',
-        institution: 'GRUPO ICEC',
-        location: 'Mirassol, SP, Brazil',
+        subtitle: 'Intern · GRUPO ICEC',
+        location: 'Mirassol, São Paulo, Brazil',
         description: [
-            'Engineering Projects Department',
-            'Elaboration and detailing of metal structures;',
-            'Plotting of projects for verification;',
-            'Preparation of checklists in Excel.'
-        ]
+            'Detailed metal structures and prepared project plots for verification.',
+            'Created engineering checklists in Excel.',
+        ],
+        icon: <FaBriefcase aria-hidden="true" />,
     },
-    // Add other positions similarly...
 ];
 
-const ProfessionalTimeline: React.FC = () => {
-    return (
-        <VerticalTimeline   >
-            {professionalHistory.map((item, index) => (
-                <VerticalTimelineElement
-                    key={index}
-                    date={item.yearRange}
-                    iconStyle={{ background: 'rgb(255, 0, 255)', color: '#fff' }}
-                    icon={<FaBriefcase />}
-                    contentStyle={{ background: 'rgba(0, 0, 0, 0.8)', color: '#fff' }}
-                    contentArrowStyle={{ borderRight: '7px solid  rgb(255, 0, 255)' }}          
-                >
-                    <h3 className="vertical-timeline-element-title">{item.title}</h3>
-                    <h4 className="vertical-timeline-element-subtitle">{item.position} at {item.institution}</h4>
-                    <h5 className="vertical-timeline-element-subtitle">{item.location}</h5>
-                    <ul>
-                        {item.description.map((desc, i) => (
-                            <li key={i}>{desc}</li>
-                        ))}
-                    </ul>
-                </VerticalTimelineElement>
-            ))}
-        </VerticalTimeline>
-    );
-};
+const ProfessionalTimeline: React.FC = () => <Timeline items={professionalHistory} />;
 
 export default ProfessionalTimeline;

@@ -1,90 +1,69 @@
-// src/App.tsx
-
-import React, { useEffect, useRef, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
-import Home from './pages/Home';
+import React from 'react';
+import { BrowserRouter as Router, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import Footer from './components/Footer';
+import Sidebar from './components/Sidebar';
+import Vinheta from './components/Vinheta';
+import { ThemeProvider } from './context/ThemeContext';
 import AboutMe from './pages/AboutMe';
 import Academic from './pages/Academic';
-import Professional from './pages/Professional';
-import Projects from './pages/Projects';
 import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
-import Sidebar from './components/Sidebar';
-import Footer from './components/Footer';
-import Vinheta from './components/Vinheta';
-import { SidebarProvider } from './context/SidebarContext';
-import './App.css';
-import './transitions.css';
+import Home from './pages/Home';
+import Professional from './pages/Professional';
+import Projects from './pages/Projects';
 
-const routesOrder = [
-    '/',
-    '/home',
-    '/about',
-    '/academic',
-    '/professional',
-    '/projects',
-    '/certifications',
-    '/contact'
-];
+const PortfolioRoutes: React.FC = () => {
+    const location = useLocation();
+    const isIntroduction = location.pathname === '/';
+
+    const routes = (
+        <Routes location={location}>
+            <Route path="/" element={<Vinheta />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<AboutMe />} />
+            <Route path="/academic" element={<Academic />} />
+            <Route path="/professional" element={<Professional />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/certifications" element={<Certifications />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
+        </Routes>
+    );
+
+    if (isIntroduction) {
+        return (
+            <main id="main-content" className="min-h-screen bg-canvas">
+                <div key={location.pathname} className="route-enter min-h-screen">
+                    {routes}
+                </div>
+            </main>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-canvas text-ink">
+            <a className="skip-link" href="#main-content">Skip to content</a>
+            <Sidebar />
+            <div className="flex min-h-screen flex-col lg:pl-72">
+                <main id="main-content" className="flex-1 pt-16 lg:pt-0">
+                    <div key={location.pathname} className="route-enter">
+                        {routes}
+                    </div>
+                </main>
+                <Footer />
+            </div>
+        </div>
+    );
+};
 
 const App: React.FC = () => {
     return (
-        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            <SidebarProvider>
-                <Main />
-            </SidebarProvider>
-        </Router>
+        <ThemeProvider>
+            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                <PortfolioRoutes />
+            </Router>
+        </ThemeProvider>
     );
-}
-
-const Main: React.FC = () => {
-    const location = useLocation();
-    const prevPathRef = useRef(location.pathname);
-    const [transitionClass, setTransitionClass] = useState('');
-
-    useEffect(() => {
-        const currentPath = location.pathname;
-        const currentIndex = routesOrder.indexOf(currentPath);
-        const previousIndex = routesOrder.indexOf(prevPathRef.current);
-
-        if (currentIndex > previousIndex) {
-            setTransitionClass('slide-up');
-        } else if (currentIndex < previousIndex) {
-            setTransitionClass('slide-down');
-        } else {
-            setTransitionClass('');
-        }
-
-        prevPathRef.current = currentPath;
-    }, [location.pathname]);
-
-    return (
-        <div className="app">
-            {location.pathname !== '/' && <Sidebar />}
-            <div className="content flex-grow">
-                <SwitchTransition>
-                    <CSSTransition
-                        key={location.pathname}
-                        classNames={transitionClass}
-                        timeout={500}
-                    >
-                        <Routes location={location}>
-                            <Route path="/" element={<Vinheta />} />
-                            <Route path="/home" element={<Home />} />
-                            <Route path="/about" element={<AboutMe />} />
-                            <Route path="/academic" element={<Academic />} />
-                            <Route path="/professional" element={<Professional />} />
-                            <Route path="/projects" element={<Projects />} />
-                            <Route path="/certifications" element={<Certifications />} />
-                            <Route path="/contact" element={<Contact />} />
-                        </Routes>
-                    </CSSTransition>
-                </SwitchTransition>
-            </div>
-            {location.pathname !== '/' && <Footer />}
-        </div>
-    );
-}
+};
 
 export default App;

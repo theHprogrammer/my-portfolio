@@ -1,6 +1,4 @@
-// src/components/Tabs.tsx
-
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 
 interface TabContent {
     title: string;
@@ -8,38 +6,71 @@ interface TabContent {
 }
 
 interface TabsProps {
+    label: string;
     tabs: TabContent[];
 }
 
-const Tabs: React.FC<TabsProps> = ({ tabs }) => {
+const Tabs: React.FC<TabsProps> = ({ label, tabs }) => {
     const [activeTab, setActiveTab] = useState(0);
+    const tabsId = useId();
+
+    const selectTabFromKeyboard = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+        const lastIndex = tabs.length - 1;
+        let nextIndex = index;
+
+        if (event.key === 'ArrowRight') {
+            nextIndex = index === lastIndex ? 0 : index + 1;
+        } else if (event.key === 'ArrowLeft') {
+            nextIndex = index === 0 ? lastIndex : index - 1;
+        } else if (event.key === 'Home') {
+            nextIndex = 0;
+        } else if (event.key === 'End') {
+            nextIndex = lastIndex;
+        } else {
+            return;
+        }
+
+        event.preventDefault();
+        setActiveTab(nextIndex);
+        document.getElementById(`${tabsId}-tab-${nextIndex}`)?.focus();
+    };
+
+    const activeContent = tabs[activeTab];
 
     return (
-        <div className="w-full">
-            <div className="flex justify-center mb-5">
-                {tabs.map((tab, index) => (
-                    <button
-                        key={index}
-                        className={`px-4 py-2 mx-2 font-semibold ${
-                            activeTab === index ? 'text-4xl font-bold text-fuchsia-500 text-shadow-fuchsia mb-5' : 'text-4xl font-bold text-cyan-300 text-shadow-cyan mb-5'
-                        }`}
-                        onClick={() => setActiveTab(index)}
-                    >
-                        {tab.title}
-                    </button>
-                ))}
+        <div className="surface-card overflow-hidden">
+            <div className="overflow-x-auto border-b border-line p-2">
+                <div className="flex min-w-max gap-1" role="tablist" aria-label={label}>
+                    {tabs.map((tab, index) => (
+                        <button
+                            key={tab.title}
+                            id={`${tabsId}-tab-${index}`}
+                            type="button"
+                            role="tab"
+                            className={`min-h-11 rounded-xl px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
+                                activeTab === index
+                                    ? 'bg-brand-soft text-brand-strong'
+                                    : 'text-muted hover:bg-soft hover:text-ink'
+                            }`}
+                            aria-selected={activeTab === index}
+                            aria-controls={`${tabsId}-panel-${index}`}
+                            tabIndex={activeTab === index ? 0 : -1}
+                            onClick={() => setActiveTab(index)}
+                            onKeyDown={(event) => selectTabFromKeyboard(event, index)}
+                        >
+                            {tab.title}
+                        </button>
+                    ))}
+                </div>
             </div>
-            <div className="text-white text-lg transition-opacity duration-300 ease-in-out">
-                {tabs.map((tab, index) => (
-                    <div
-                        key={index}
-                        className={`transition-opacity duration-500 ease-in-out ${
-                            activeTab === index ? 'opacity-100' : 'opacity-0 absolute'
-                        }`}
-                    >
-                        {tab.content}
-                    </div>
-                ))}
+            <div
+                id={`${tabsId}-panel-${activeTab}`}
+                className="p-5 text-base leading-7 text-muted sm:p-7"
+                role="tabpanel"
+                aria-labelledby={`${tabsId}-tab-${activeTab}`}
+                tabIndex={0}
+            >
+                {activeContent.content}
             </div>
         </div>
     );

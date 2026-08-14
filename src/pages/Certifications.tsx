@@ -1,24 +1,37 @@
-// src/pages/Certifications.tsx
-
 import React from 'react';
-import { useSidebar } from '../context/SidebarContext';
+import { FaArrowUpRightFromSquare, FaLinkedin } from 'react-icons/fa6';
+import PageLayout from '../components/PageLayout';
 
 const Certifications: React.FC = () => {
-    const { isSidebarOpen } = useSidebar();
-
     return (
-        <div className={`flex flex-col items-center p-5 ${isSidebarOpen ? 'lg:ml-[220px]' : ''}`}>
-            <h1 className="text-5xl font-bold mb-10 text-fuchsia-600 text-shadow-fuchsia">Certifications</h1>
-            <p className="text-2xl text-cyan-300 text-shadow-cyan text-center mb-5">
-                This page is currently under development. My certifications will be added here soon.
-                In the meantime, you can verify them on my LinkedIn profile:
-                <a href="https://www.linkedin.com/in/thehprogrammer/details/certifications/"
-                    className="text-fuchsia-400 underline ml-1" target="_blank" rel="noopener noreferrer">
-                    LinkedIn Certifications
-                </a>.
-            </p>
-        </div>
+        <PageLayout
+            eyebrow="Continuous learning"
+            title="Certifications"
+            description="Courses and credentials that complement my academic background and practical experience."
+        >
+            <section className="surface-card grid gap-8 p-6 sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
+                <div>
+                    <span className="inline-flex rounded-full bg-brand-soft px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-brand-strong">
+                        Catalog in progress
+                    </span>
+                    <h2 className="mt-5 text-2xl font-bold text-ink">Verified credentials are available on LinkedIn.</h2>
+                    <p className="mt-3 max-w-2xl leading-7 text-muted">
+                        The dedicated catalog will be added here. For now, LinkedIn contains the current certificates and issuing organizations.
+                    </p>
+                </div>
+                <a
+                    className="primary-button"
+                    href="https://www.linkedin.com/in/thehprogrammer/details/certifications/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <FaLinkedin aria-hidden="true" />
+                    View certifications
+                    <FaArrowUpRightFromSquare aria-hidden="true" />
+                </a>
+            </section>
+        </PageLayout>
     );
-}
+};
 
 export default Certifications;
