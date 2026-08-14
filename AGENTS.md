@@ -57,4 +57,5 @@
 ## Publicação no GitHub
 
 - Usar `$publish-without-gh` quando o usuário autorizar commit ou push e o GitHub CLI não estiver disponível.
+- Usar `$suggest-pr` para gerar título e descrição completos a partir do diff da branch, sem criar ou publicar a pull request.
 - Preservar a identidade Git já configurada e nunca adicionar autoria, coautoria ou trailers atribuídos à IA.

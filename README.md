@@ -14,6 +14,7 @@ Antes de alterar qualquer arquivo:
 4. Preserve mudanças existentes e mantenha o menor diff completo possível.
 5. Não faça commit, push, deploy ou alterações externas sem solicitação explícita.
 6. Use `$publish-without-gh` quando houver autorização para publicar e o GitHub CLI não estiver disponível.
+7. Use `$suggest-pr` para gerar título e descrição completos sem criar a pull request.
 
 Em caso de conflito, use esta ordem de precedência:
 

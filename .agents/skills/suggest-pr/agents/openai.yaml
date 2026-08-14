@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sugerir Pull Request"
+  short_description: "Gera título e descrição completa de PR"
+  default_prompt: "Use $suggest-pr para gerar o título e a descrição completa da pull request da branch atual."
