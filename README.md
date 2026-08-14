@@ -51,7 +51,7 @@ Não há backend, autenticação ou persistência de dados neste repositório.
 | Rotas | React Router 6 |
 | Estilos | Tailwind CSS 3 e CSS existente |
 | Testes | Jest e Testing Library |
-| Animações | Framer Motion e React Transition Group |
+| Animações | CSS com suporte a `prefers-reduced-motion` |
 | Ambiente | Docker Compose |
 | Hospedagem | Vercel |
 
@@ -72,7 +72,7 @@ Restrições arquiteturais importantes:
 ├── src/
 │   ├── assets/              # Imagens usadas pela interface
 │   ├── components/          # Componentes compartilhados
-│   ├── context/             # Estado compartilhado da sidebar
+│   ├── context/             # Estado compartilhado do tema visual
 │   ├── pages/               # Conteúdo das rotas
 │   ├── App.tsx              # Roteamento e estrutura principal
 │   ├── App.test.tsx         # Teste de entrada da aplicação
@@ -84,6 +84,52 @@ Restrições arquiteturais importantes:
 ├── tailwind.config.js       # Configuração do Tailwind
 └── tsconfig.json            # Configuração TypeScript estrita
 ```
+
+## Arquitetura da aplicação
+
+A aplicação usa uma arquitetura SPA inteiramente executada no navegador. Não há camada de servidor, API própria, banco de dados ou estado remoto: o conteúdo do portfólio está definido nos componentes React e os recursos visuais são empacotados a partir de `src/assets/` ou servidos diretamente por `public/`.
+
+```mermaid
+flowchart TD
+    Browser[Navegador] --> Bootstrap[src/index.tsx]
+    Bootstrap --> App[src/App.tsx]
+    App --> ThemeProvider[ThemeProvider]
+    ThemeProvider --> Router[BrowserRouter]
+    Router --> Shell[Shell da aplicação]
+    Shell --> Navigation[Sidebar e Footer]
+    Shell --> Routes[Routes]
+    Routes --> Pages[src/pages]
+    Pages --> Components[src/components]
+    Components --> Assets[src/assets]
+```
+
+### Responsabilidades por camada
+
+| Camada | Responsabilidade |
+| --- | --- |
+| Bootstrap | `src/index.tsx` cria a raiz React, habilita `StrictMode`, carrega o CSS gerado pelo Tailwind e inicia `App`. |
+| Composição | `src/App.tsx` monta o provider de tema, o roteador e o shell compartilhado pelas rotas internas. |
+| Navegação | O React Router relaciona cada URL a uma página. `Sidebar` usa `NavLink`, enquanto `Footer` e a própria sidebar formam a estrutura persistente fora da vinheta inicial. |
+| Estado compartilhado | `src/context/ThemeContext.tsx` controla o tema claro ou escuro e persiste a escolha em `localStorage`. O menu mobile mantém estado local, e não existe store global de dados. |
+| Páginas | `src/pages/` organiza o conteúdo por rota e compõe os componentes reutilizáveis necessários a cada seção. |
+| Componentes | `src/components/` concentra navegação, tema, rodapé, vinheta, estrutura de página, cards, abas, skills e timeline semântica. |
+| Apresentação | `tailwind.config.js` expõe cores semânticas baseadas em variáveis CSS. `src/tailwind.css` define os tokens dos dois temas, estilos base e primitives compartilhadas; os componentes completam o layout com classes utilitárias. |
+| Conteúdo e recursos | Textos e coleções estão declarados localmente em TSX. Imagens importadas de `src/assets/` entram no bundle; arquivos de `public/` são copiados sem processamento. |
+
+### Fluxo de navegação e renderização
+
+1. O navegador carrega `public/index.html`, e o bundle inicia a aplicação por `src/index.tsx`.
+2. `App` disponibiliza o tema visual, cria o `BrowserRouter` e monta o shell responsivo.
+3. O shell observa `location.pathname` e renderiza a rota correspondente com uma transição curta de entrada.
+4. A rota `/` exibe somente `Vinheta`; nas demais rotas, sidebar e footer permanecem no shell ao redor do conteúdo.
+5. As páginas compõem componentes e recursos locais sem requisições de dados ou efeitos de servidor.
+
+### Limites arquiteturais atuais
+
+- O roteamento depende da configuração da hospedagem para redirecionar URLs da SPA a `index.html`.
+- Somente a preferência de tema possui persistência local; o conteúdo continua estático e não existe persistência remota.
+- Os tokens de tema ficam centralizados no CSS, enquanto estrutura, responsividade e estados de componentes usam utilitários Tailwind no TSX.
+- Como o conteúdo é renderizado no cliente pelo CRA, metadados específicos por rota e pré-renderização não fazem parte da arquitetura atual.
 
 ## Ambiente Docker-first
 

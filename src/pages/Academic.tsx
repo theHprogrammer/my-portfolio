@@ -1,16 +1,17 @@
 import React from 'react';
 import AcademicsTimeline from '../components/AcademicsTimeline';
-import { useSidebar } from '../context/SidebarContext';
+import PageLayout from '../components/PageLayout';
 
 const Academic: React.FC = () => {
-    const { isSidebarOpen } = useSidebar();
-
     return (
-        <div className={`flex flex-col items-center p-5 ${isSidebarOpen ? 'lg:ml-[220px]' : ''}`}>
-            <h1 className="text-5xl font-bold mb-20 text-fuchsia-600 text-shadow-fuchsia">Academic History</h1>
+        <PageLayout
+            eyebrow="Education"
+            title="Academic history"
+            description="A path across engineering and technology, with a foundation in both software and the physical systems it supports."
+        >
             <AcademicsTimeline />
-        </div>
+        </PageLayout>
     );
-}
+};
 
 export default Academic;
