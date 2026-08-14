@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portfolio Optimizer"
+  short_description: "Otimização enxuta do portfólio React"
+  default_prompt: "Use $optimize-portfolio para otimizar este portfólio com métricas, mudanças mínimas e validação objetiva."

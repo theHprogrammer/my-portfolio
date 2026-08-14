@@ -27,14 +27,19 @@ const Sidebar: React.FC = () => {
     return (
         <>
             <button
-                className={`fixed top-4 left-4 z-50 flex flex-col justify-around items-center w-8 h-8 bg-transparent border-none cursor-pointer focus:outline-none ${isSidebarOpen ? 'open' : ''}`}
+                type="button"
+                className={`fixed top-4 left-4 z-50 flex flex-col justify-around items-center w-8 h-8 bg-transparent border-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 ${isSidebarOpen ? 'open' : ''}`}
                 onClick={toggleSidebar}
+                aria-label={isSidebarOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={isSidebarOpen}
+                aria-controls="primary-navigation"
             >
                 <span className={`block w-full h-1 bg-fuchsia-400 rounded transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'transform translate-y-2 rotate-45' : ''}`}></span>
                 <span className={`block w-full h-1 bg-fuchsia-400 rounded transition-opacity duration-300 ease-in-out ${isSidebarOpen ? 'opacity-0' : ''}`}></span>
                 <span className={`block w-full h-1 bg-fuchsia-400 rounded transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'transform -translate-y-2 -rotate-45' : ''}`}></span>
             </button>
             <div
+                id="primary-navigation"
                 className={`fixed top-0 left-0 sidebar bg-gray-950 text-white flex flex-col items-center pt-14 transform transition-transform duration-300 ease-in-out z-40 neon-border ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
                 <h2 className="mb-10 text-fuchsia-600 font-orbitron text-3xl font-bold text-shadow-fuchsia">Menu</h2>
