@@ -13,7 +13,7 @@ Antes de alterar qualquer arquivo:
 3. Execute Node.js, npm, testes e builds somente por Docker.
 4. Preserve mudanças existentes e mantenha o menor diff completo possível.
 5. Não faça commit, push, deploy ou alterações externas sem solicitação explícita.
-6. Use `$publish-without-gh` quando houver autorização para publicar e o GitHub CLI não estiver disponível.
+6. Use `$publish` para revisar, criar commits convencionais e enviar uma branch sem atribuir autoria à IA.
 7. Use `$suggest-pr` para gerar título e descrição completos sem criar a pull request.
 
 Em caso de conflito, use esta ordem de precedência:
@@ -175,7 +175,9 @@ docker compose run --rm --user root app sh -lc 'cd studio && npm install'
 docker compose run --rm --user root -p 3333:3333 app sh -lc 'cd studio && npm run dev -- --host 0.0.0.0'
 ```
 
-O Studio fica disponível em [http://localhost:3333](http://localhost:3333). A carga inicial exige login no projeto e deve ser executada somente quando for necessário restaurar o conteúdo-base:
+O Studio publicado fica disponível em [thehprogrammer-portfolio.sanity.studio](https://thehprogrammer-portfolio.sanity.studio/), com autenticação e autorização gerenciadas pelo Sanity. O comando de desenvolvimento acima mantém a versão local em [http://localhost:3333](http://localhost:3333).
+
+A carga inicial exige login no projeto e deve ser executada somente quando for necessário restaurar o conteúdo-base:
 
 ```bash
 docker compose run --rm app sh -lc 'cd studio && npm run seed'

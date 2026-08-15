@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publicar mudanças"
+  short_description: "Commit e push sem autoria de IA"
+  default_prompt: "Use $publish para revisar, commitar e enviar as mudanças com commits convencionais."
