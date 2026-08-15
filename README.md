@@ -38,7 +38,7 @@ O site apresenta informações pessoais e profissionais por meio de uma SPA com 
 | `/certifications` | Certificações |
 | `/contact` | Contatos e redes sociais |
 
-Não há backend, autenticação ou persistência de dados neste repositório.
+O conteúdo público é administrado pelo Sanity Studio e lido diretamente do Content Lake. Não há API própria nem autenticação no bundle da SPA; o acesso de edição usa a conta autorizada no projeto Sanity.
 
 ## Stack e restrições
 
@@ -54,6 +54,7 @@ Não há backend, autenticação ou persistência de dados neste repositório.
 | Animações | CSS com suporte a `prefers-reduced-motion` |
 | Ambiente | Docker Compose |
 | Hospedagem | Vercel |
+| CMS | Sanity Content Lake e Studio |
 
 Restrições arquiteturais importantes:
 
@@ -72,11 +73,13 @@ Restrições arquiteturais importantes:
 ├── src/
 │   ├── assets/              # Imagens usadas pela interface
 │   ├── components/          # Componentes compartilhados
-│   ├── context/             # Estado compartilhado do tema visual
+│   ├── content/             # Tipos, fallback local e cliente de conteúdo
+│   ├── context/             # Estado compartilhado de tema e conteúdo
 │   ├── pages/               # Conteúdo das rotas
 │   ├── App.tsx              # Roteamento e estrutura principal
 │   ├── App.test.tsx         # Teste de entrada da aplicação
 │   └── index.tsx            # Bootstrap do React
+├── studio/                  # Sanity Studio, schemas e carga inicial
 ├── AGENTS.md                # Regras obrigatórias para agentes
 ├── Dockerfile               # Imagem Node.js 24 sem usuário privilegiado
 ├── docker-compose.yml       # Ambiente de desenvolvimento
@@ -87,19 +90,22 @@ Restrições arquiteturais importantes:
 
 ## Arquitetura da aplicação
 
-A aplicação usa uma arquitetura SPA inteiramente executada no navegador. Não há camada de servidor, API própria, banco de dados ou estado remoto: o conteúdo do portfólio está definido nos componentes React e os recursos visuais são empacotados a partir de `src/assets/` ou servidos diretamente por `public/`.
+A aplicação usa uma arquitetura SPA executada no navegador. Não há camada de servidor nem API própria: o conteúdo público é consultado no dataset Sanity e, se a configuração ou a consulta falhar, a interface preserva o conteúdo local de fallback. Recursos visuais locais continuam empacotados a partir de `src/assets/` ou servidos diretamente por `public/`.
 
 ```mermaid
 flowchart TD
     Browser[Navegador] --> Bootstrap[src/index.tsx]
     Bootstrap --> App[src/App.tsx]
-    App --> ThemeProvider[ThemeProvider]
+    App --> ContentProvider[PortfolioContentProvider]
+    ContentProvider --> ThemeProvider[ThemeProvider]
     ThemeProvider --> Router[BrowserRouter]
     Router --> Shell[Shell da aplicação]
     Shell --> Navigation[Sidebar e Footer]
     Shell --> Routes[Routes]
     Routes --> Pages[src/pages]
     Pages --> Components[src/components]
+    ContentProvider --> Sanity[Sanity Content Lake]
+    SanityStudio[Sanity Studio] --> Sanity
     Components --> Assets[src/assets]
 ```
 
@@ -108,13 +114,13 @@ flowchart TD
 | Camada | Responsabilidade |
 | --- | --- |
 | Bootstrap | `src/index.tsx` cria a raiz React, habilita `StrictMode`, carrega o CSS gerado pelo Tailwind e inicia `App`. |
-| Composição | `src/App.tsx` monta o provider de tema, o roteador e o shell compartilhado pelas rotas internas. |
+| Composição | `src/App.tsx` monta os providers de conteúdo e tema, o roteador e o shell compartilhado pelas rotas internas. |
 | Navegação | O React Router relaciona cada URL a uma página. `Sidebar` usa `NavLink`, enquanto `Footer` e a própria sidebar formam a estrutura persistente fora da vinheta inicial. |
-| Estado compartilhado | `src/context/ThemeContext.tsx` controla o tema claro ou escuro e persiste a escolha em `localStorage`. O menu mobile mantém estado local, e não existe store global de dados. |
+| Estado compartilhado | `src/context/ThemeContext.tsx` controla o tema claro ou escuro e persiste a escolha em `localStorage`. `PortfolioContentContext.tsx` carrega o conteúdo remoto e mantém o fallback local durante a consulta ou em caso de falha. |
 | Páginas | `src/pages/` organiza o conteúdo por rota e compõe os componentes reutilizáveis necessários a cada seção. |
 | Componentes | `src/components/` concentra navegação, tema, rodapé, vinheta, estrutura de página, cards, abas, skills e timeline semântica. |
 | Apresentação | `tailwind.config.js` expõe cores semânticas baseadas em variáveis CSS. `src/tailwind.css` define os tokens dos dois temas, estilos base e primitives compartilhadas; os componentes completam o layout com classes utilitárias. |
-| Conteúdo e recursos | Textos e coleções estão declarados localmente em TSX. Imagens importadas de `src/assets/` entram no bundle; arquivos de `public/` são copiados sem processamento. |
+| Conteúdo e recursos | `src/content/` concentra tipos, fallback e consulta GROQ. O Studio isolado em `studio/` concentra schemas e edição. Imagens importadas de `src/assets/` entram no bundle; arquivos de `public/` são copiados sem processamento. |
 
 ### Fluxo de navegação e renderização
 
@@ -122,12 +128,12 @@ flowchart TD
 2. `App` disponibiliza o tema visual, cria o `BrowserRouter` e monta o shell responsivo.
 3. O shell observa `location.pathname` e renderiza a rota correspondente com uma transição curta de entrada.
 4. A rota `/` exibe somente `Vinheta`; nas demais rotas, sidebar e footer permanecem no shell ao redor do conteúdo.
-5. As páginas compõem componentes e recursos locais sem requisições de dados ou efeitos de servidor.
+5. O provider consulta o Sanity uma vez e distribui o conteúdo para as páginas; enquanto isso, ou se a consulta falhar, usa o conteúdo local de fallback.
 
 ### Limites arquiteturais atuais
 
 - O roteamento depende da configuração da hospedagem para redirecionar URLs da SPA a `index.html`.
-- Somente a preferência de tema possui persistência local; o conteúdo continua estático e não existe persistência remota.
+- O dataset contém apenas conteúdo destinado à exibição pública. Tokens de escrita e credenciais do Studio nunca devem ser enviados ao frontend.
 - Os tokens de tema ficam centralizados no CSS, enquanto estrutura, responsividade e estados de componentes usam utilitários Tailwind no TSX.
 - Como o conteúdo é renderizado no cliente pelo CRA, metadados específicos por rota e pré-renderização não fazem parte da arquitetura atual.
 
@@ -150,6 +156,30 @@ docker compose down
 ```
 
 O código-fonte é montado em `/app`, enquanto `node_modules` permanece isolado no volume nomeado `node_modules`.
+
+### Conteúdo com Sanity
+
+Copie `.env.example` para `.env.local` e informe o projeto e o dataset públicos:
+
+```dotenv
+REACT_APP_SANITY_PROJECT_ID=r8m8smdo
+REACT_APP_SANITY_DATASET=production
+```
+
+Esses identificadores não são segredos. Não adicione tokens Sanity a variáveis `REACT_APP_*`, pois o CRA as incorpora ao bundle público.
+
+Instale e execute o Studio isolado do React 18 da aplicação:
+
+```bash
+docker compose run --rm --user root app sh -lc 'cd studio && npm install'
+docker compose run --rm --user root -p 3333:3333 app sh -lc 'cd studio && npm run dev -- --host 0.0.0.0'
+```
+
+O Studio fica disponível em [http://localhost:3333](http://localhost:3333). A carga inicial exige login no projeto e deve ser executada somente quando for necessário restaurar o conteúdo-base:
+
+```bash
+docker compose run --rm app sh -lc 'cd studio && npm run seed'
+```
 
 ### Comandos dentro do container
 

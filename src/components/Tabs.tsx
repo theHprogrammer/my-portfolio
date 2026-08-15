@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 
 interface TabContent {
     title: string;
@@ -13,6 +13,12 @@ interface TabsProps {
 const Tabs: React.FC<TabsProps> = ({ label, tabs }) => {
     const [activeTab, setActiveTab] = useState(0);
     const tabsId = useId();
+
+    useEffect(() => {
+        if (activeTab >= tabs.length) {
+            setActiveTab(0);
+        }
+    }, [activeTab, tabs.length]);
 
     const selectTabFromKeyboard = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
         const lastIndex = tabs.length - 1;
@@ -36,6 +42,10 @@ const Tabs: React.FC<TabsProps> = ({ label, tabs }) => {
     };
 
     const activeContent = tabs[activeTab];
+
+    if (!activeContent) {
+        return null;
+    }
 
     return (
         <div className="surface-card overflow-hidden">
