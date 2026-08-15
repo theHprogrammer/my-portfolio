@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 import Vinheta from './components/Vinheta';
 import { ThemeProvider } from './context/ThemeContext';
+import { PortfolioContentProvider } from './context/PortfolioContentContext';
 import AboutMe from './pages/AboutMe';
 import Academic from './pages/Academic';
 import Certifications from './pages/Certifications';
@@ -59,9 +60,11 @@ const PortfolioRoutes: React.FC = () => {
 const App: React.FC = () => {
     return (
         <ThemeProvider>
-            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-                <PortfolioRoutes />
-            </Router>
+            <PortfolioContentProvider>
+                <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                    <PortfolioRoutes />
+                </Router>
+            </PortfolioContentProvider>
         </ThemeProvider>
     );
 };

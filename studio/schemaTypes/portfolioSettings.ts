@@ -1,0 +1,93 @@
+import {defineArrayMember, defineField, defineType} from 'sanity'
+
+const requiredObject = (Rule: import('sanity').ObjectRule) => Rule.required()
+
+export const portfolioSettings = defineType({
+  name: 'portfolioSettings',
+  title: 'Textos gerais e páginas',
+  type: 'document',
+  groups: [
+    {name: 'home', title: 'Início'},
+    {name: 'about', title: 'Sobre mim'},
+    {name: 'academic', title: 'Acadêmico'},
+    {name: 'professional', title: 'Profissional'},
+    {name: 'projects', title: 'Projetos'},
+    {name: 'certifications', title: 'Certificações'},
+    {name: 'contact', title: 'Contato'},
+  ],
+  fields: [
+    defineField({
+      name: 'home',
+      title: 'Página inicial',
+      type: 'object',
+      group: 'home',
+      validation: requiredObject,
+      fields: [
+        defineField({name: 'eyebrow', title: 'Chamada curta', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'title', title: 'Título principal', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'introduction', title: 'Apresentação', type: 'text', rows: 4, validation: (Rule) => Rule.required()}),
+        defineField({name: 'primaryAction', title: 'Ação principal', type: 'portfolioLink', validation: (Rule) => Rule.required()}),
+        defineField({name: 'secondaryAction', title: 'Ação secundária', type: 'portfolioLink', validation: (Rule) => Rule.required()}),
+        defineField({name: 'currentFocusEyebrow', title: 'Chamada do foco atual', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'currentFocus', title: 'Foco atual', type: 'text', rows: 3, validation: (Rule) => Rule.required()}),
+        defineField({name: 'focusDetails', title: 'Detalhes do foco', type: 'array', of: [defineArrayMember({type: 'fact'})]}),
+        defineField({name: 'areasHeader', title: 'Cabeçalho das áreas', type: 'pageHeader', validation: (Rule) => Rule.required()}),
+        defineField({name: 'focusAreas', title: 'Áreas de atuação', type: 'array', of: [defineArrayMember({type: 'focusArea'})], validation: (Rule) => Rule.required().min(1)}),
+      ],
+    }),
+    defineField({
+      name: 'about',
+      title: 'Página sobre mim',
+      type: 'object',
+      group: 'about',
+      validation: requiredObject,
+      fields: [
+        defineField({name: 'header', title: 'Cabeçalho', type: 'pageHeader', validation: (Rule) => Rule.required()}),
+        defineField({name: 'greeting', title: 'Saudação', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'fullName', title: 'Nome completo', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'role', title: 'Atuação', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'biography', title: 'Biografia', type: 'array', of: [defineArrayMember({type: 'text', rows: 4})], validation: (Rule) => Rule.required().min(1)}),
+        defineField({name: 'profileImage', title: 'Foto de perfil', type: 'image', options: {hotspot: true}}),
+        defineField({name: 'profileImageAlt', title: 'Descrição acessível da foto', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'journeyTitle', title: 'Título das abas', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'tabs', title: 'Abas', type: 'array', of: [defineArrayMember({type: 'aboutTab'})], validation: (Rule) => Rule.required().min(1)}),
+        defineField({name: 'skillsHeader', title: 'Cabeçalho das habilidades', type: 'pageHeader', validation: (Rule) => Rule.required()}),
+      ],
+    }),
+    defineField({name: 'academicHeader', title: 'Cabeçalho acadêmico', type: 'pageHeader', group: 'academic', validation: (Rule) => Rule.required()}),
+    defineField({name: 'professionalHeader', title: 'Cabeçalho profissional', type: 'pageHeader', group: 'professional', validation: (Rule) => Rule.required()}),
+    defineField({
+      name: 'projectsPage',
+      title: 'Página de projetos',
+      type: 'object',
+      group: 'projects',
+      fields: [
+        defineField({name: 'header', title: 'Cabeçalho', type: 'pageHeader', validation: (Rule) => Rule.required()}),
+        defineField({name: 'emptyState', title: 'Exibição sem projetos', type: 'emptyState', validation: (Rule) => Rule.required()}),
+      ],
+    }),
+    defineField({
+      name: 'certificationsPage',
+      title: 'Página de certificações',
+      type: 'object',
+      group: 'certifications',
+      fields: [
+        defineField({name: 'header', title: 'Cabeçalho', type: 'pageHeader', validation: (Rule) => Rule.required()}),
+        defineField({name: 'emptyState', title: 'Exibição sem certificações', type: 'emptyState', validation: (Rule) => Rule.required()}),
+      ],
+    }),
+    defineField({
+      name: 'contactPage',
+      title: 'Página de contato',
+      type: 'object',
+      group: 'contact',
+      fields: [
+        defineField({name: 'header', title: 'Cabeçalho', type: 'pageHeader', validation: (Rule) => Rule.required()}),
+        defineField({name: 'cardActionLabel', title: 'Texto dos cartões', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'creditsTitle', title: 'Título dos créditos', type: 'string', validation: (Rule) => Rule.required()}),
+        defineField({name: 'creditsDescription', title: 'Descrição dos créditos', type: 'text', rows: 2, validation: (Rule) => Rule.required()}),
+      ],
+    }),
+  ],
+  preview: {prepare: () => ({title: 'Textos gerais e páginas'})},
+})

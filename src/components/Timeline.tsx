@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 
 export interface TimelineItem {
+    id: string;
     date: string;
     title: string;
     subtitle: string;
@@ -17,7 +18,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
     return (
         <ol className="relative ml-4 border-l border-line sm:ml-5">
             {items.map((item) => (
-                <li key={`${item.date}-${item.title}`} className="relative mb-8 pl-8 last:mb-0 sm:pl-10">
+                <li key={item.id} className="relative mb-8 pl-8 last:mb-0 sm:pl-10">
                     <span className="absolute -left-5 top-5 grid h-10 w-10 place-items-center rounded-xl border border-line bg-surface text-brand shadow-sm">
                         {item.icon}
                     </span>
