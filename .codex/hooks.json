@@ -1,0 +1,18 @@
+{
+  "description": "Carrega os comandos e fontes de contexto do projeto no início da sessão.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"$(git rev-parse --show-toplevel)/.codex/project.json\"",
+            "statusMessage": "Carregando contexto do portfólio",
+            "additionalContextLimit": 3000
+          }
+        ]
+      }
+    ]
+  }
+}

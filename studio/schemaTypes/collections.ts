@@ -1,5 +1,5 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
-import {validateLink} from './linkValidation'
+import { defineArrayMember, defineField, defineType } from 'sanity'
+import { validateLink } from './linkValidation'
 
 const orderField = defineField({
   name: 'order',
@@ -10,11 +10,31 @@ const orderField = defineField({
 })
 
 const timelineFields = [
-  defineField({name: 'period', title: 'Período', type: 'string', validation: (Rule) => Rule.required()}),
-  defineField({name: 'title', title: 'Título', type: 'string', validation: (Rule) => Rule.required()}),
-  defineField({name: 'subtitle', title: 'Instituição ou organização', type: 'string', validation: (Rule) => Rule.required()}),
-  defineField({name: 'location', title: 'Localização', type: 'string'}),
-  defineField({name: 'descriptions', title: 'Descrição', type: 'array', of: [defineArrayMember({type: 'text', rows: 3})]}),
+  defineField({
+    name: 'period',
+    title: 'Período',
+    type: 'string',
+    validation: (Rule) => Rule.required(),
+  }),
+  defineField({
+    name: 'title',
+    title: 'Título',
+    type: 'string',
+    validation: (Rule) => Rule.required(),
+  }),
+  defineField({
+    name: 'subtitle',
+    title: 'Instituição ou organização',
+    type: 'string',
+    validation: (Rule) => Rule.required(),
+  }),
+  defineField({ name: 'location', title: 'Localização', type: 'string' }),
+  defineField({
+    name: 'descriptions',
+    title: 'Descrição',
+    type: 'array',
+    of: [defineArrayMember({ type: 'text', rows: 3 })],
+  }),
   orderField,
 ]
 
@@ -28,11 +48,16 @@ export const academicEntry = defineType({
       name: 'iconKey',
       title: 'Ícone',
       type: 'string',
-      options: {list: [{title: 'Universidade', value: 'university'}, {title: 'Escola', value: 'school'}]},
+      options: {
+        list: [
+          { title: 'Universidade', value: 'university' },
+          { title: 'Escola', value: 'school' },
+        ],
+      },
       initialValue: 'university',
     }),
   ],
-  preview: {select: {title: 'title', subtitle: 'period'}},
+  preview: { select: { title: 'title', subtitle: 'period' } },
 })
 
 export const professionalEntry = defineType({
@@ -40,7 +65,7 @@ export const professionalEntry = defineType({
   title: 'Experiência profissional',
   type: 'document',
   fields: [...timelineFields],
-  preview: {select: {title: 'title', subtitle: 'period'}},
+  preview: { select: { title: 'title', subtitle: 'period' } },
 })
 
 export const skillGroup = defineType({
@@ -48,7 +73,12 @@ export const skillGroup = defineType({
   title: 'Grupo de habilidades',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Título', type: 'string', validation: (Rule) => Rule.required()}),
+    defineField({
+      name: 'title',
+      title: 'Título',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'skills',
       title: 'Habilidades',
@@ -59,17 +89,28 @@ export const skillGroup = defineType({
           type: 'object',
           name: 'skill',
           fields: [
-            defineField({name: 'name', title: 'Nome', type: 'string', validation: (Rule) => Rule.required()}),
-            defineField({name: 'level', title: 'Nível', type: 'string'}),
-            defineField({name: 'iconKey', title: 'Identificador do ícone', type: 'string', description: 'Opcional. Quando não reconhecido, o site usa as iniciais.'}),
+            defineField({
+              name: 'name',
+              title: 'Nome',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({ name: 'level', title: 'Nível', type: 'string' }),
+            defineField({
+              name: 'iconKey',
+              title: 'Identificador do ícone',
+              type: 'string',
+              description:
+                'Opcional. Quando não reconhecido, o site usa as iniciais.',
+            }),
           ],
-          preview: {select: {title: 'name', subtitle: 'level'}},
+          preview: { select: { title: 'name', subtitle: 'level' } },
         }),
       ],
     }),
     orderField,
   ],
-  preview: {select: {title: 'title'}},
+  preview: { select: { title: 'title' } },
 })
 
 export const contactLink = defineType({
@@ -77,7 +118,12 @@ export const contactLink = defineType({
   title: 'Canal de contato',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Nome', type: 'string', validation: (Rule) => Rule.required()}),
+    defineField({
+      name: 'title',
+      title: 'Nome',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'url',
       title: 'Link',
@@ -85,11 +131,20 @@ export const contactLink = defineType({
       description: 'Aceita URL, mailto: ou tel:.',
       validation: (Rule) => Rule.required().custom(validateLink),
     }),
-    defineField({name: 'iconKey', title: 'Identificador do ícone local', type: 'string'}),
-    defineField({name: 'image', title: 'Ícone personalizado', type: 'image', description: 'Se enviado, substitui o ícone local.'}),
+    defineField({
+      name: 'iconKey',
+      title: 'Identificador do ícone local',
+      type: 'string',
+    }),
+    defineField({
+      name: 'image',
+      title: 'Ícone personalizado',
+      type: 'image',
+      description: 'Se enviado, substitui o ícone local.',
+    }),
     orderField,
   ],
-  preview: {select: {title: 'title', subtitle: 'url', media: 'image'}},
+  preview: { select: { title: 'title', subtitle: 'url', media: 'image' } },
 })
 
 export const iconCredit = defineType({
@@ -97,11 +152,21 @@ export const iconCredit = defineType({
   title: 'Crédito de ícone',
   type: 'document',
   fields: [
-    defineField({name: 'label', title: 'Atribuição', type: 'string', validation: (Rule) => Rule.required()}),
-    defineField({name: 'url', title: 'Link da fonte', type: 'url', validation: (Rule) => Rule.required().uri({scheme: ['http', 'https']})}),
+    defineField({
+      name: 'label',
+      title: 'Atribuição',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'url',
+      title: 'Link da fonte',
+      type: 'url',
+      validation: (Rule) => Rule.required().uri({ scheme: ['http', 'https'] }),
+    }),
     orderField,
   ],
-  preview: {select: {title: 'label', subtitle: 'url'}},
+  preview: { select: { title: 'label', subtitle: 'url' } },
 })
 
 export const project = defineType({
@@ -109,15 +174,46 @@ export const project = defineType({
   title: 'Projeto',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Título', type: 'string', validation: (Rule) => Rule.required()}),
-    defineField({name: 'summary', title: 'Resumo', type: 'text', rows: 4, validation: (Rule) => Rule.required()}),
-    defineField({name: 'technologies', title: 'Tecnologias', type: 'array', of: [defineArrayMember({type: 'string'})]}),
-    defineField({name: 'repositoryUrl', title: 'Repositório', type: 'url', validation: (Rule) => Rule.uri({scheme: ['http', 'https']})}),
-    defineField({name: 'demoUrl', title: 'Demonstração', type: 'url', validation: (Rule) => Rule.uri({scheme: ['http', 'https']})}),
-    defineField({name: 'image', title: 'Imagem', type: 'image', options: {hotspot: true}}),
+    defineField({
+      name: 'title',
+      title: 'Título',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'summary',
+      title: 'Resumo',
+      type: 'text',
+      rows: 4,
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'technologies',
+      title: 'Tecnologias',
+      type: 'array',
+      of: [defineArrayMember({ type: 'string' })],
+    }),
+    defineField({
+      name: 'repositoryUrl',
+      title: 'Repositório',
+      type: 'url',
+      validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+    }),
+    defineField({
+      name: 'demoUrl',
+      title: 'Demonstração',
+      type: 'url',
+      validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Imagem',
+      type: 'image',
+      options: { hotspot: true },
+    }),
     orderField,
   ],
-  preview: {select: {title: 'title', subtitle: 'summary', media: 'image'}},
+  preview: { select: { title: 'title', subtitle: 'summary', media: 'image' } },
 })
 
 export const certification = defineType({
@@ -125,14 +221,42 @@ export const certification = defineType({
   title: 'Certificação',
   type: 'document',
   fields: [
-    defineField({name: 'title', title: 'Nome', type: 'string', validation: (Rule) => Rule.required()}),
-    defineField({name: 'issuer', title: 'Emissor', type: 'string', validation: (Rule) => Rule.required()}),
-    defineField({name: 'date', title: 'Data ou período', type: 'string'}),
-    defineField({name: 'credentialUrl', title: 'Link da credencial', type: 'url', validation: (Rule) => Rule.uri({scheme: ['http', 'https']})}),
-    defineField({name: 'image', title: 'Imagem', type: 'image', options: {hotspot: true}}),
+    defineField({
+      name: 'title',
+      title: 'Nome',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'issuer',
+      title: 'Emissor',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({ name: 'date', title: 'Data ou período', type: 'string' }),
+    defineField({
+      name: 'credentialUrl',
+      title: 'Link da credencial',
+      type: 'url',
+      validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Imagem',
+      type: 'image',
+      options: { hotspot: true },
+    }),
     orderField,
   ],
-  preview: {select: {title: 'title', subtitle: 'issuer', media: 'image'}},
+  preview: { select: { title: 'title', subtitle: 'issuer', media: 'image' } },
 })
 
-export const collectionTypes = [academicEntry, professionalEntry, skillGroup, contactLink, iconCredit, project, certification]
+export const collectionTypes = [
+  academicEntry,
+  professionalEntry,
+  skillGroup,
+  contactLink,
+  iconCredit,
+  project,
+  certification,
+]

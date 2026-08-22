@@ -1,0 +1,19 @@
+default_permissions = "portfolio"
+project_doc_max_bytes = 32768
+
+[features]
+hooks = true
+
+[permissions.portfolio]
+description = "Workspace do portfólio com segredos bloqueados e artefatos gerados somente leitura."
+extends = ":workspace"
+
+[permissions.portfolio.filesystem.":workspace_roots"]
+"**/.env" = "deny"
+"**/.env.local" = "deny"
+"**/.env.*.local" = "deny"
+"node_modules/**" = "read"
+"studio/node_modules/**" = "read"
+"build/**" = "read"
+"studio/dist/**" = "read"
+"studio/.sanity/**" = "read"

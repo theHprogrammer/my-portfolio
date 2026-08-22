@@ -1,0 +1,28 @@
+{
+  "project": "my-portfolio",
+  "runtime": "Node.js 24",
+  "packageManager": "npm",
+  "execution": "docker-compose",
+  "sources": {
+    "instructions": "AGENTS.md",
+    "documentation": "docs/README.md",
+    "architecture": "docs/arquitetura/visao-geral.md",
+    "activeSpecifications": ".specs/project/STATE.md"
+  },
+  "validation": {
+    "documentation": [
+      "git diff --check",
+      "docker compose run --rm app npx --yes harness-score@1.6.0 . --min-level 3"
+    ],
+    "application": [
+      "docker compose run --rm app npm run format:check",
+      "docker compose run --rm app npm run lint",
+      "docker compose run --rm app npx tsc --noEmit",
+      "docker compose run --rm -e CI=true app npm test -- --watchAll=false",
+      "docker compose run --rm app npm run build"
+    ],
+    "studio": [
+      "docker compose run --rm --user root app sh -lc 'cd studio && npm ci && npx tsc --noEmit && npm run build'"
+    ]
+  }
+}

@@ -20,7 +20,10 @@ const Tabs: React.FC<TabsProps> = ({ label, tabs }) => {
         }
     }, [activeTab, tabs.length]);
 
-    const selectTabFromKeyboard = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const selectTabFromKeyboard = (
+        event: React.KeyboardEvent<HTMLButtonElement>,
+        index: number,
+    ) => {
         const lastIndex = tabs.length - 1;
         let nextIndex = index;
 
@@ -50,7 +53,11 @@ const Tabs: React.FC<TabsProps> = ({ label, tabs }) => {
     return (
         <div className="surface-card overflow-hidden">
             <div className="overflow-x-auto border-b border-line p-2">
-                <div className="flex min-w-max gap-1" role="tablist" aria-label={label}>
+                <div
+                    className="flex min-w-max gap-1"
+                    role="tablist"
+                    aria-label={label}
+                >
                     {tabs.map((tab, index) => (
                         <button
                             key={tab.title}
@@ -66,7 +73,9 @@ const Tabs: React.FC<TabsProps> = ({ label, tabs }) => {
                             aria-controls={`${tabsId}-panel-${index}`}
                             tabIndex={activeTab === index ? 0 : -1}
                             onClick={() => setActiveTab(index)}
-                            onKeyDown={(event) => selectTabFromKeyboard(event, index)}
+                            onKeyDown={(event) =>
+                                selectTabFromKeyboard(event, index)
+                            }
                         >
                             {tab.title}
                         </button>

@@ -1,4 +1,10 @@
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import React, {
+    createContext,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState,
+} from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -29,10 +35,14 @@ const getInitialTheme = (): Theme => {
         return 'dark';
     }
 
-    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
 };
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
+    children,
+}) => {
     const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
     useEffect(() => {
@@ -42,7 +52,9 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         root.classList.toggle('dark', isDark);
         root.style.colorScheme = theme;
 
-        const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+        const themeColor = document.querySelector<HTMLMetaElement>(
+            'meta[name="theme-color"]',
+        );
         themeColor?.setAttribute('content', isDark ? '#0d121b' : '#f7f8fa');
 
         try {
@@ -53,7 +65,9 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     }, [theme]);
 
     const toggleTheme = () => {
-        setTheme((currentTheme) => currentTheme === 'light' ? 'dark' : 'light');
+        setTheme((currentTheme) =>
+            currentTheme === 'light' ? 'dark' : 'light',
+        );
     };
 
     return (

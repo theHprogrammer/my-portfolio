@@ -18,7 +18,9 @@ const Vinheta: React.FC = () => {
                         Welcome dear visitor.
                     </h1>
                     <p className="mt-6 max-w-2xl text-lg leading-8 text-muted sm:text-xl">
-                        I am Helder, a Computer Engineer building thoughtful software and intelligent systems at the intersection of engineering, data and artificial intelligence.
+                        I am Helder, a Computer Engineer building thoughtful
+                        software and intelligent systems at the intersection of
+                        engineering, data and artificial intelligence.
                     </p>
                     <div className="mt-9 flex flex-wrap gap-3">
                         <Link className="primary-button" to="/home">
@@ -37,7 +39,10 @@ const Vinheta: React.FC = () => {
                 </div>
 
                 <div className="relative mx-auto w-full max-w-sm">
-                    <div className="absolute -inset-5 -z-10 rounded-[2rem] bg-brand-soft" aria-hidden="true" />
+                    <div
+                        className="absolute -inset-5 -z-10 rounded-[2rem] bg-brand-soft"
+                        aria-hidden="true"
+                    />
                     <img
                         src={profileImage}
                         alt="Helder Henrique"
@@ -46,8 +51,12 @@ const Vinheta: React.FC = () => {
                         className="aspect-square w-full rounded-[1.75rem] border border-line object-cover shadow-soft"
                     />
                     <div className="absolute -bottom-5 -left-5 rounded-2xl border border-line bg-surface px-5 py-4 shadow-soft sm:-left-10">
-                        <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted">Based in Brazil</p>
-                        <p className="mt-1 font-semibold text-ink">Engineering with purpose.</p>
+                        <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted">
+                            Based in Brazil
+                        </p>
+                        <p className="mt-1 font-semibold text-ink">
+                            Engineering with purpose.
+                        </p>
                     </div>
                 </div>
             </div>

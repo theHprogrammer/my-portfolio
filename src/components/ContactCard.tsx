@@ -9,7 +9,12 @@ interface ContactCardProps {
     actionLabel: string;
 }
 
-const ContactCard: React.FC<ContactCardProps> = ({ title, image, link, actionLabel }) => {
+const ContactCard: React.FC<ContactCardProps> = ({
+    title,
+    image,
+    link,
+    actionLabel,
+}) => {
     const safeLink = getSafeExternalHref(link);
 
     if (!safeLink) {
@@ -27,12 +32,27 @@ const ContactCard: React.FC<ContactCardProps> = ({ title, image, link, actionLab
             <div className="flex items-start justify-between gap-4">
                 <span className="grid h-14 w-14 place-items-center rounded-xl bg-soft">
                     {image ? (
-                        <img src={image} alt="" width="40" height="40" className="h-10 w-10 object-contain" loading="lazy" />
+                        <img
+                            src={image}
+                            alt=""
+                            width="40"
+                            height="40"
+                            className="h-10 w-10 object-contain"
+                            loading="lazy"
+                        />
                     ) : (
-                        <span className="font-mono text-sm font-bold text-brand" aria-hidden="true">{title.slice(0, 2)}</span>
+                        <span
+                            className="font-mono text-sm font-bold text-brand"
+                            aria-hidden="true"
+                        >
+                            {title.slice(0, 2)}
+                        </span>
                     )}
                 </span>
-                <FaArrowUpRightFromSquare className="text-sm text-muted transition-colors group-hover:text-brand" aria-hidden="true" />
+                <FaArrowUpRightFromSquare
+                    className="text-sm text-muted transition-colors group-hover:text-brand"
+                    aria-hidden="true"
+                />
             </div>
             <div>
                 <h2 className="font-bold text-ink">{title}</h2>

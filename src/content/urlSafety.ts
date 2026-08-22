@@ -1,6 +1,13 @@
-const allowedExternalProtocols = new Set(['http:', 'https:', 'mailto:', 'tel:']);
+const allowedExternalProtocols = new Set([
+    'http:',
+    'https:',
+    'mailto:',
+    'tel:',
+]);
 
-export const getSafeExternalHref = (value: string | undefined): string | undefined => {
+export const getSafeExternalHref = (
+    value: string | undefined,
+): string | undefined => {
     if (!value) {
         return undefined;
     }
@@ -13,4 +20,5 @@ export const getSafeExternalHref = (value: string | undefined): string | undefin
     }
 };
 
-export const getSafeInternalPath = (value: string): string => /^\/(?!\/)/.test(value) ? value : '/';
+export const getSafeInternalPath = (value: string): string =>
+    /^\/(?!\/)/.test(value) ? value : '/';

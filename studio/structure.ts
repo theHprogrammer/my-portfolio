@@ -1,4 +1,4 @@
-import type {StructureResolver} from 'sanity/structure'
+import type { StructureResolver } from 'sanity/structure'
 
 const collectionTypes = [
   'academicEntry',
@@ -17,7 +17,11 @@ export const portfolioStructure: StructureResolver = (S) =>
       S.listItem()
         .title('Textos gerais e páginas')
         .schemaType('portfolioSettings')
-        .child(S.document().schemaType('portfolioSettings').documentId('portfolioSettings')),
+        .child(
+          S.document()
+            .schemaType('portfolioSettings')
+            .documentId('portfolioSettings'),
+        ),
       S.divider(),
       ...S.documentTypeListItems().filter((item) => {
         const id = item.getId()

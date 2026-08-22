@@ -1,4 +1,4 @@
-import type {PortfolioContent} from './types';
+import type { PortfolioContent } from './types';
 
 const projectId = process.env.REACT_APP_SANITY_PROJECT_ID;
 const dataset = process.env.REACT_APP_SANITY_DATASET || 'production';
@@ -74,22 +74,25 @@ const portfolioQuery = `{
     }
 }`;
 
-export const fetchPortfolioContent = async (): Promise<PortfolioContent | null> => {
-    if (!projectId) {
-        return null;
-    }
+export const fetchPortfolioContent =
+    async (): Promise<PortfolioContent | null> => {
+        if (!projectId) {
+            return null;
+        }
 
-    const queryUrl = new URL(`https://${projectId}.apicdn.sanity.io/v2026-08-15/data/query/${dataset}`);
-    queryUrl.searchParams.set('query', portfolioQuery);
+        const queryUrl = new URL(
+            `https://${projectId}.apicdn.sanity.io/v2026-08-15/data/query/${dataset}`,
+        );
+        queryUrl.searchParams.set('query', portfolioQuery);
 
-    const response = await fetch(queryUrl.toString(), {
-        headers: {Accept: 'application/json'},
-    });
+        const response = await fetch(queryUrl.toString(), {
+            headers: { Accept: 'application/json' },
+        });
 
-    if (!response.ok) {
-        throw new Error(`Sanity respondeu com HTTP ${response.status}.`);
-    }
+        if (!response.ok) {
+            throw new Error(`Sanity respondeu com HTTP ${response.status}.`);
+        }
 
-    const payload = await response.json() as {result: PortfolioContent};
-    return payload.result;
-};
+        const payload = (await response.json()) as { result: PortfolioContent };
+        return payload.result;
+    };

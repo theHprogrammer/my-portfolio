@@ -1,6 +1,17 @@
-import type {IconType} from 'react-icons';
-import {FaBriefcase, FaDocker, FaGitAlt, FaGithub, FaLinux, FaNodeJs, FaReact, FaSchool, FaUniversity, FaWordpress} from 'react-icons/fa';
-import {FaBrain, FaCode, FaLayerGroup} from 'react-icons/fa6';
+import type { IconType } from 'react-icons';
+import {
+    FaBriefcase,
+    FaDocker,
+    FaGitAlt,
+    FaGithub,
+    FaLinux,
+    FaNodeJs,
+    FaReact,
+    FaSchool,
+    FaUniversity,
+    FaWordpress,
+} from 'react-icons/fa';
+import { FaBrain, FaCode, FaLayerGroup } from 'react-icons/fa6';
 import {
     SiCplusplus,
     SiDjango,

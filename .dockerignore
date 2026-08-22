@@ -2,6 +2,9 @@
 .github
 .agents
 .codex
+.husky/_
+.specs
+docs
 node_modules
 build
 coverage

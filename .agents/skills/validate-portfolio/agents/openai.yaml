@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Validar portfólio'
+  short_description: 'Validação proporcional no ambiente Docker'
+  default_prompt: 'Use $validate-portfolio para validar as mudanças atuais no ambiente Docker.'
