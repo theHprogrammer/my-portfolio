@@ -14,9 +14,9 @@ Ele não envia telemetria nem altera arquivos.
 Após qualquer alteração em `hooks.json`, revise e aprove o novo hash com `/hooks`. A execução fica
 desabilitada até essa confirmação de confiança.
 
-O perfil permite somente o socket rootless do Docker em `/run/user/1000/docker.sock`, necessário
-para executar as validações Docker-first. Outros sockets Unix permanecem bloqueados. Alterações no
-perfil entram em vigor em uma nova sessão do Codex.
+O proxy e o perfil permitem somente o socket rootless do Docker em
+`/run/user/1000/docker.sock`, necessário para executar as validações Docker-first. Outros sockets
+Unix permanecem bloqueados. Alterações nessa política entram em vigor em uma nova sessão do Codex.
 
 O diretório `.git/` recebe escrita dentro deste workspace para permitir operações solicitadas como
 pull, criação de branches e commits. Essa exceção não libera outros repositórios nem remove as

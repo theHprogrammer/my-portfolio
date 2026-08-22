@@ -3,7 +3,12 @@ project_doc_max_bytes = 32768
 
 [features]
 hooks = true
-network_proxy = true
+
+[features.network_proxy]
+enabled = true
+
+[features.network_proxy.unix_sockets]
+"/run/user/1000/docker.sock" = "allow"
 
 [permissions.portfolio]
 description = "Workspace do portfólio com segredos bloqueados e artefatos gerados somente leitura."
