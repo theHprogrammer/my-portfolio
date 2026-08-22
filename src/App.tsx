@@ -1,5 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Navigate,
+    Route,
+    Routes,
+    useLocation,
+} from 'react-router-dom';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 import Vinheta from './components/Vinheta';
@@ -34,7 +40,10 @@ const PortfolioRoutes: React.FC = () => {
     if (isIntroduction) {
         return (
             <main id="main-content" className="min-h-screen bg-canvas">
-                <div key={location.pathname} className="route-enter min-h-screen">
+                <div
+                    key={location.pathname}
+                    className="route-enter min-h-screen"
+                >
                     {routes}
                 </div>
             </main>
@@ -43,7 +52,9 @@ const PortfolioRoutes: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-canvas text-ink">
-            <a className="skip-link" href="#main-content">Skip to content</a>
+            <a className="skip-link" href="#main-content">
+                Skip to content
+            </a>
             <Sidebar />
             <div className="flex min-h-screen flex-col lg:pl-72">
                 <main id="main-content" className="flex-1 pt-16 lg:pt-0">
@@ -61,7 +72,12 @@ const App: React.FC = () => {
     return (
         <ThemeProvider>
             <PortfolioContentProvider>
-                <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                <Router
+                    future={{
+                        v7_startTransition: true,
+                        v7_relativeSplatPath: true,
+                    }}
+                >
                     <PortfolioRoutes />
                 </Router>
             </PortfolioContentProvider>

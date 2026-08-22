@@ -22,7 +22,12 @@ const Contact: React.FC = () => {
                             key={contact.id}
                             title={contact.title}
                             link={contact.url}
-                            image={contact.imageUrl || (contact.iconKey ? contactIcons[contact.iconKey] : undefined)}
+                            image={
+                                contact.imageUrl ||
+                                (contact.iconKey
+                                    ? contactIcons[contact.iconKey]
+                                    : undefined)
+                            }
                             actionLabel={page.cardActionLabel}
                         />
                     ))}
@@ -30,7 +35,10 @@ const Contact: React.FC = () => {
             </section>
 
             <section className="mt-16">
-                <SectionHeading title={page.creditsTitle} description={page.creditsDescription} />
+                <SectionHeading
+                    title={page.creditsTitle}
+                    description={page.creditsDescription}
+                />
                 <details className="surface-card group p-5">
                     <summary className="cursor-pointer font-semibold text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">
                         View icon attributions
@@ -39,7 +47,9 @@ const Contact: React.FC = () => {
                         {content.iconCredits.map((credit) => (
                             <li key={credit.id}>
                                 <a
-                                    href={getSafeExternalHref(credit.url) || '#'}
+                                    href={
+                                        getSafeExternalHref(credit.url) || '#'
+                                    }
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-link"

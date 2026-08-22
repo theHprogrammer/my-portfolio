@@ -19,8 +19,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ showLabel = false }) => {
             aria-label={label}
             title={label}
         >
-            {isDark ? <FaSun aria-hidden="true" /> : <FaMoon aria-hidden="true" />}
-            {showLabel ? <span>{isDark ? 'Light mode' : 'Dark mode'}</span> : null}
+            {isDark ? (
+                <FaSun aria-hidden="true" />
+            ) : (
+                <FaMoon aria-hidden="true" />
+            )}
+            {showLabel ? (
+                <span>{isDark ? 'Light mode' : 'Dark mode'}</span>
+            ) : null}
         </button>
     );
 };

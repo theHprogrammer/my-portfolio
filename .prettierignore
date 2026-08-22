@@ -1,0 +1,9 @@
+build
+coverage
+node_modules
+package-lock.json
+public
+studio/.sanity
+studio/dist
+studio/node_modules
+studio/package-lock.json

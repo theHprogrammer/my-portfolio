@@ -25,11 +25,13 @@ const NavigationList: React.FC<NavigationListProps> = ({ onNavigate }) => {
                     <li key={item.to}>
                         <NavLink
                             to={item.to}
-                            className={({ isActive }) => `flex min-h-11 items-center rounded-xl px-4 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
-                                isActive
-                                    ? 'bg-brand-soft text-brand-strong'
-                                    : 'text-muted hover:bg-soft hover:text-ink'
-                            }`}
+                            className={({ isActive }) =>
+                                `flex min-h-11 items-center rounded-xl px-4 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
+                                    isActive
+                                        ? 'bg-brand-soft text-brand-strong'
+                                        : 'text-muted hover:bg-soft hover:text-ink'
+                                }`
+                            }
                             onClick={onNavigate}
                         >
                             {item.label}
@@ -48,10 +50,16 @@ const Brand: React.FC = () => {
             className="flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
             aria-label="Helder Henrique, home"
         >
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-action text-sm font-bold text-white">H.</span>
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-action text-sm font-bold text-white">
+                H.
+            </span>
             <span>
-                <span className="block text-sm font-bold text-ink">Helder Henrique</span>
-                <span className="block text-xs text-muted">Computer Engineer</span>
+                <span className="block text-sm font-bold text-ink">
+                    Helder Henrique
+                </span>
+                <span className="block text-xs text-muted">
+                    Computer Engineer
+                </span>
             </span>
         </Link>
     );
@@ -111,12 +119,22 @@ const Sidebar: React.FC = () => {
                     <button
                         type="button"
                         className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-surface text-ink transition-colors hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-                        onClick={() => setIsMobileOpen((currentValue) => !currentValue)}
-                        aria-label={isMobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                        onClick={() =>
+                            setIsMobileOpen((currentValue) => !currentValue)
+                        }
+                        aria-label={
+                            isMobileOpen
+                                ? 'Close navigation menu'
+                                : 'Open navigation menu'
+                        }
                         aria-expanded={isMobileOpen}
                         aria-controls="mobile-navigation"
                     >
-                        {isMobileOpen ? <FaXmark aria-hidden="true" /> : <FaBars aria-hidden="true" />}
+                        {isMobileOpen ? (
+                            <FaXmark aria-hidden="true" />
+                        ) : (
+                            <FaBars aria-hidden="true" />
+                        )}
                     </button>
                 </div>
             </header>
@@ -134,7 +152,9 @@ const Sidebar: React.FC = () => {
                         id="mobile-navigation"
                         className="fixed inset-x-4 top-20 z-50 rounded-2xl border border-line bg-surface p-4 shadow-soft lg:hidden"
                     >
-                        <NavigationList onNavigate={() => setIsMobileOpen(false)} />
+                        <NavigationList
+                            onNavigate={() => setIsMobileOpen(false)}
+                        />
                     </div>
                 </>
             ) : null}

@@ -12,13 +12,19 @@ const AboutMe: React.FC = () => {
         title: tab.title,
         content: (
             <div className="space-y-4">
-                {tab.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                {tab.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                ))}
                 {tab.facts.length > 0 ? (
                     <dl className="grid gap-3 rounded-xl bg-soft p-4 sm:grid-cols-2">
                         {tab.facts.map((fact) => (
                             <div key={fact.id}>
-                                <dt className="text-xs uppercase tracking-wide">{fact.label}</dt>
-                                <dd className="font-semibold text-ink">{fact.value}</dd>
+                                <dt className="text-xs uppercase tracking-wide">
+                                    {fact.label}
+                                </dt>
+                                <dd className="font-semibold text-ink">
+                                    {fact.value}
+                                </dd>
                             </div>
                         ))}
                     </dl>
@@ -36,10 +42,16 @@ const AboutMe: React.FC = () => {
             <section className="surface-card grid items-center gap-8 overflow-hidden p-6 md:grid-cols-[1fr_18rem] md:p-8 lg:grid-cols-[1fr_22rem]">
                 <div>
                     <span className="eyebrow">{about.greeting}</span>
-                    <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">{about.fullName}</h2>
-                    <p className="mt-2 text-lg font-semibold text-brand">{about.role}</p>
+                    <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                        {about.fullName}
+                    </h2>
+                    <p className="mt-2 text-lg font-semibold text-brand">
+                        {about.role}
+                    </p>
                     <div className="mt-6 space-y-4 leading-7 text-muted">
-                        {about.biography.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                        {about.biography.map((paragraph) => (
+                            <p key={paragraph}>{paragraph}</p>
+                        ))}
                     </div>
                 </div>
                 <div className="mx-auto w-full max-w-xs">

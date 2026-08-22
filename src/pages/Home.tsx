@@ -22,22 +22,39 @@ const Home: React.FC = () => {
                         {home.introduction}
                     </p>
                     <div className="mt-9 flex flex-wrap gap-3">
-                        <Link className="primary-button" to={getSafeInternalPath(home.primaryAction.href)}>
+                        <Link
+                            className="primary-button"
+                            to={getSafeInternalPath(home.primaryAction.href)}
+                        >
                             {home.primaryAction.label}
                             <FaArrowRight aria-hidden="true" />
                         </Link>
-                        <Link className="secondary-button" to={getSafeInternalPath(home.secondaryAction.href)}>{home.secondaryAction.label}</Link>
+                        <Link
+                            className="secondary-button"
+                            to={getSafeInternalPath(home.secondaryAction.href)}
+                        >
+                            {home.secondaryAction.label}
+                        </Link>
                     </div>
                 </div>
 
-                <aside className="surface-card p-6 sm:p-8" aria-label="Current focus">
+                <aside
+                    className="surface-card p-6 sm:p-8"
+                    aria-label="Current focus"
+                >
                     <span className="eyebrow">{home.currentFocusEyebrow}</span>
-                    <p className="text-2xl font-bold leading-tight text-ink">{home.currentFocus}</p>
+                    <p className="text-2xl font-bold leading-tight text-ink">
+                        {home.currentFocus}
+                    </p>
                     <dl className="mt-8 space-y-5 border-t border-line pt-6">
                         {home.focusDetails.map((detail) => (
                             <div key={detail.id}>
-                                <dt className="font-mono text-xs uppercase tracking-[0.14em] text-muted">{detail.label}</dt>
-                                <dd className="mt-1 font-semibold text-ink">{detail.value}</dd>
+                                <dt className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+                                    {detail.label}
+                                </dt>
+                                <dd className="mt-1 font-semibold text-ink">
+                                    {detail.value}
+                                </dd>
                             </div>
                         ))}
                     </dl>
@@ -52,15 +69,25 @@ const Home: React.FC = () => {
                 />
                 <div className="grid gap-5 md:grid-cols-3">
                     {home.focusAreas.map((area) => {
-                        const Icon = focusIcons[area.iconKey] || focusIcons.layers;
+                        const Icon =
+                            focusIcons[area.iconKey] || focusIcons.layers;
 
-                        return <article key={area.id} className="surface-card p-6">
-                            <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-soft text-brand" aria-hidden="true">
-                                <Icon />
-                            </span>
-                            <h2 className="mt-5 text-xl font-bold text-ink">{area.title}</h2>
-                            <p className="mt-3 leading-7 text-muted">{area.description}</p>
-                        </article>;
+                        return (
+                            <article key={area.id} className="surface-card p-6">
+                                <span
+                                    className="grid h-11 w-11 place-items-center rounded-xl bg-brand-soft text-brand"
+                                    aria-hidden="true"
+                                >
+                                    <Icon />
+                                </span>
+                                <h2 className="mt-5 text-xl font-bold text-ink">
+                                    {area.title}
+                                </h2>
+                                <p className="mt-3 leading-7 text-muted">
+                                    {area.description}
+                                </p>
+                            </article>
+                        );
                     })}
                 </div>
             </section>

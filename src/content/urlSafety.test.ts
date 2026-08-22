@@ -1,8 +1,12 @@
-import {getSafeExternalHref, getSafeInternalPath} from './urlSafety';
+import { getSafeExternalHref, getSafeInternalPath } from './urlSafety';
 
 test('accepts supported external links', () => {
-    expect(getSafeExternalHref('https://example.com/profile')).toBe('https://example.com/profile');
-    expect(getSafeExternalHref('mailto:contato@example.com')).toBe('mailto:contato@example.com');
+    expect(getSafeExternalHref('https://example.com/profile')).toBe(
+        'https://example.com/profile',
+    );
+    expect(getSafeExternalHref('mailto:contato@example.com')).toBe(
+        'mailto:contato@example.com',
+    );
 });
 
 test('rejects unsafe external links', () => {

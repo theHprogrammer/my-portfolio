@@ -1,7 +1,16 @@
-import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
-import {defaultPortfolioContent} from '../content/defaultPortfolioContent';
-import {fetchPortfolioContent, isSanityConfigured} from '../content/sanityClient';
-import type {PortfolioContent} from '../content/types';
+import React, {
+    createContext,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
+import { defaultPortfolioContent } from '../content/defaultPortfolioContent';
+import {
+    fetchPortfolioContent,
+    isSanityConfigured,
+} from '../content/sanityClient';
+import type { PortfolioContent } from '../content/types';
 
 interface PortfolioContentContextValue {
     content: PortfolioContent;
@@ -9,9 +18,13 @@ interface PortfolioContentContextValue {
     isUsingFallback: boolean;
 }
 
-const PortfolioContentContext = createContext<PortfolioContentContextValue | undefined>(undefined);
+const PortfolioContentContext = createContext<
+    PortfolioContentContextValue | undefined
+>(undefined);
 
-const mergeWithDefaults = (remoteContent: PortfolioContent): PortfolioContent => ({
+const mergeWithDefaults = (
+    remoteContent: PortfolioContent,
+): PortfolioContent => ({
     ...remoteContent,
     settings: {
         ...defaultPortfolioContent.settings,
@@ -47,7 +60,9 @@ const mergeWithDefaults = (remoteContent: PortfolioContent): PortfolioContent =>
     },
 });
 
-export const PortfolioContentProvider: React.FC<React.PropsWithChildren> = ({children}) => {
+export const PortfolioContentProvider: React.FC<React.PropsWithChildren> = ({
+    children,
+}) => {
     const [content, setContent] = useState(defaultPortfolioContent);
     const [isLoading, setIsLoading] = useState(isSanityConfigured);
     const [isUsingFallback, setIsUsingFallback] = useState(!isSanityConfigured);
@@ -69,7 +84,10 @@ export const PortfolioContentProvider: React.FC<React.PropsWithChildren> = ({chi
                 setIsUsingFallback(false);
             })
             .catch((error: unknown) => {
-                console.error('Não foi possível carregar o conteúdo publicado do Sanity.', error);
+                console.error(
+                    'Não foi possível carregar o conteúdo publicado do Sanity.',
+                    error,
+                );
                 setIsUsingFallback(true);
             })
             .finally(() => {
@@ -83,16 +101,25 @@ export const PortfolioContentProvider: React.FC<React.PropsWithChildren> = ({chi
         };
     }, []);
 
-    const value = useMemo(() => ({content, isLoading, isUsingFallback}), [content, isLoading, isUsingFallback]);
+    const value = useMemo(
+        () => ({ content, isLoading, isUsingFallback }),
+        [content, isLoading, isUsingFallback],
+    );
 
-    return <PortfolioContentContext.Provider value={value}>{children}</PortfolioContentContext.Provider>;
+    return (
+        <PortfolioContentContext.Provider value={value}>
+            {children}
+        </PortfolioContentContext.Provider>
+    );
 };
 
 export const usePortfolioContent = (): PortfolioContentContextValue => {
     const context = useContext(PortfolioContentContext);
 
     if (!context) {
-        throw new Error('usePortfolioContent deve ser usado dentro de PortfolioContentProvider.');
+        throw new Error(
+            'usePortfolioContent deve ser usado dentro de PortfolioContentProvider.',
+        );
     }
 
     return context;

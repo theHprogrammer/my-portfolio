@@ -3,142 +3,150 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-        color-scheme: light;
-        --color-canvas: 247 248 250;
-        --color-surface: 255 255 255;
-        --color-soft: 238 242 246;
-        --color-ink: 21 31 48;
-        --color-muted: 78 91 109;
-        --color-line: 218 225 234;
-        --color-brand: 36 83 193;
-        --color-brand-strong: 24 59 144;
-        --color-brand-soft: 232 239 255;
-        --color-action: 36 83 193;
-        --color-action-hover: 24 59 144;
-    }
+  :root {
+    color-scheme: light;
+    --color-canvas: 247 248 250;
+    --color-surface: 255 255 255;
+    --color-soft: 238 242 246;
+    --color-ink: 21 31 48;
+    --color-muted: 78 91 109;
+    --color-line: 218 225 234;
+    --color-brand: 36 83 193;
+    --color-brand-strong: 24 59 144;
+    --color-brand-soft: 232 239 255;
+    --color-action: 36 83 193;
+    --color-action-hover: 24 59 144;
+  }
 
-    :root.dark {
-        color-scheme: dark;
-        --color-canvas: 13 18 27;
-        --color-surface: 20 27 39;
-        --color-soft: 28 37 51;
-        --color-ink: 244 247 251;
-        --color-muted: 165 177 195;
-        --color-line: 48 59 75;
-        --color-brand: 126 161 255;
-        --color-brand-strong: 166 190 255;
-        --color-brand-soft: 27 50 94;
-        --color-action: 54 89 190;
-        --color-action-hover: 45 73 157;
-    }
+  :root.dark {
+    color-scheme: dark;
+    --color-canvas: 13 18 27;
+    --color-surface: 20 27 39;
+    --color-soft: 28 37 51;
+    --color-ink: 244 247 251;
+    --color-muted: 165 177 195;
+    --color-line: 48 59 75;
+    --color-brand: 126 161 255;
+    --color-brand-strong: 166 190 255;
+    --color-brand-soft: 27 50 94;
+    --color-action: 54 89 190;
+    --color-action-hover: 45 73 157;
+  }
 
-    html {
-        min-width: 320px;
-        scroll-behavior: smooth;
-        background: rgb(var(--color-canvas));
-    }
+  html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+    background: rgb(var(--color-canvas));
+  }
 
-    body {
-        min-width: 320px;
-        min-height: 100vh;
-        margin: 0;
-        background: rgb(var(--color-canvas));
-        color: rgb(var(--color-ink));
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-        transition: background-color 180ms ease, color 180ms ease;
-    }
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background: rgb(var(--color-canvas));
+    color: rgb(var(--color-ink));
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
 
-    ::selection {
-        background: rgb(var(--color-brand-soft));
-        color: rgb(var(--color-ink));
-    }
+  ::selection {
+    background: rgb(var(--color-brand-soft));
+    color: rgb(var(--color-ink));
+  }
 
-    a,
-    button {
-        -webkit-tap-highlight-color: transparent;
-    }
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
 
-    img {
-        max-width: 100%;
-    }
+  img {
+    max-width: 100%;
+  }
 }
 
 @layer components {
-    .skip-link {
-        @apply fixed left-4 top-3 z-[100] -translate-y-20 rounded-lg bg-brand px-4 py-2 font-semibold text-white transition-transform focus:translate-y-0;
-    }
+  .skip-link {
+    @apply fixed left-4 top-3 z-[100] -translate-y-20 rounded-lg bg-brand px-4 py-2 font-semibold text-white transition-transform focus:translate-y-0;
+  }
 
-    .route-enter {
-        animation: route-enter 220ms ease-out both;
-    }
+  .route-enter {
+    animation: route-enter 220ms ease-out both;
+  }
 
-    .page-container {
-        @apply mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-14 lg:px-12 lg:py-16;
-    }
+  .page-container {
+    @apply mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-14 lg:px-12 lg:py-16;
+  }
 
-    .page-header {
-        @apply mb-10 max-w-3xl sm:mb-12;
-    }
+  .page-header {
+    @apply mb-10 max-w-3xl sm:mb-12;
+  }
 
-    .eyebrow {
-        @apply mb-3 block font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand;
-    }
+  .eyebrow {
+    @apply mb-3 block font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand;
+  }
 
-    .page-title {
-        @apply text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl;
-    }
+  .page-title {
+    @apply text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl;
+  }
 
-    .page-description {
-        @apply mt-4 max-w-2xl text-base leading-7 text-muted sm:text-lg;
-    }
+  .page-description {
+    @apply mt-4 max-w-2xl text-base leading-7 text-muted sm:text-lg;
+  }
 
-    .section-title {
-        @apply text-2xl font-bold tracking-tight text-ink sm:text-3xl;
-    }
+  .section-title {
+    @apply text-2xl font-bold tracking-tight text-ink sm:text-3xl;
+  }
 
-    .surface-card {
-        @apply rounded-2xl border border-line bg-surface shadow-soft;
-    }
+  .surface-card {
+    @apply rounded-2xl border border-line bg-surface shadow-soft;
+  }
 
-    .primary-button {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-action px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-action-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
-    }
+  .primary-button {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-action px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-action-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
+  }
 
-    .secondary-button {
-        @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
-    }
+  .secondary-button {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
+  }
 
-    .text-link {
-        @apply rounded-sm font-semibold text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:text-brand-strong hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand;
-    }
+  .text-link {
+    @apply rounded-sm font-semibold text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:text-brand-strong hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand;
+  }
 }
 
 @keyframes route-enter {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
+  html {
+    scroll-behavior: auto;
+  }
 
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-    }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
