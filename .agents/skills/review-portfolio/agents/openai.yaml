@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Revisar portfólio'
+  short_description: 'Revisão técnica do portfólio React'
+  default_prompt: 'Use $review-portfolio para revisar as mudanças atuais e apontar defeitos concretos.'

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Publicar sem GitHub CLI"
-  short_description: "Commit e push via Git SSH sem autoria de IA"
-  default_prompt: "Use $publish-without-gh para revisar, commitar e enviar as mudanças sem gh e sem autoria da IA."
+  display_name: 'Publicar sem GitHub CLI'
+  short_description: 'Commit e push via Git SSH sem autoria de IA'
+  default_prompt: 'Use $publish-without-gh para revisar, commitar e enviar as mudanças sem gh e sem autoria da IA.'

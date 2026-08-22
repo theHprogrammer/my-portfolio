@@ -14,7 +14,7 @@ Publicar mudanças com rastreabilidade e autoria humana usando apenas o Git loca
 1. Confirmar que o usuário autorizou prosseguir sem `gh`.
 2. Executar `git status -sb`, revisar o diff e separar mudanças não relacionadas.
 3. Confirmar que `user.name` e `user.email` já estão configurados. Não alterar essa identidade.
-4. Executar as validações relevantes antes do commit e relatar qualquer falha.
+4. Aplicar `$validate-portfolio` antes do commit e relatar qualquer falha.
 5. Criar uma branch `agent/<descricao>` ao partir da branch padrão, salvo instrução explícita para usar outra branch.
 6. Adicionar somente caminhos pertencentes ao escopo e revisar `git diff --cached`.
 7. Criar commits pequenos e lógicos com mensagens breves. Não incluir trailers `Co-authored-by`, referências ao Codex ou identidade de IA.

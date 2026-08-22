@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Spec-Driven Portfolio'
+  short_description: 'Especifica e executa mudanças rastreáveis'
+  default_prompt: 'Use $spec-driven para especificar e executar esta mudança com profundidade proporcional ao risco.'
