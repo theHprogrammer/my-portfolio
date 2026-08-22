@@ -26,4 +26,4 @@ conteúdo público administrado pelo Sanity.
 - Regras de agentes: `AGENTS.md`.
 - Produto e início rápido: `README.md`.
 - Documentação: `docs/README.md`.
-- Automação: `.github/README.md`.
+- Automação: `.github/AUTOMATION.md`.

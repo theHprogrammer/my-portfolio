@@ -75,7 +75,7 @@ Studio, restaurar conteúdo ou diagnosticar o ambiente.
 | [Configuração local](./docs/operacao/configuracao-local.md)                                                | Docker, Sanity Studio, comandos e diagnóstico.               |
 | [Desenvolvimento orientado a especificação](./docs/processos/desenvolvimento-orientado-a-especificacao.md) | Planejamento, artefatos e retomada de trabalho.              |
 | [Automação e segurança](./docs/qualidade/automacao-e-seguranca.md)                                         | CI, validações, dependências e `harness-score`.              |
-| [Automação do GitHub](./.github/README.md)                                                                 | Workflows, gatilhos e limites de publicação.                 |
+| [Automação do GitHub](./.github/AUTOMATION.md)                                                             | Workflows, gatilhos e limites de publicação.                 |
 | [Instruções do repositório](./AGENTS.md)                                                                   | Regras obrigatórias para agentes e contribuições assistidas. |
 | [Configuração do Codex](./.codex/README.md)                                                                | Permissões, hooks e contexto carregado por sessão.           |
 
