@@ -3,12 +3,14 @@ project_doc_max_bytes = 32768
 
 [features]
 hooks = true
+network_proxy = true
 
 [permissions.portfolio]
 description = "Workspace do portfólio com segredos bloqueados e artefatos gerados somente leitura."
 extends = ":workspace"
 
 [permissions.portfolio.filesystem.":workspace_roots"]
+".git" = "write"
 "**/.env" = "deny"
 "**/.env.local" = "deny"
 "**/.env.*.local" = "deny"
@@ -17,3 +19,9 @@ extends = ":workspace"
 "build/**" = "read"
 "studio/dist/**" = "read"
 "studio/.sanity/**" = "read"
+
+[permissions.portfolio.network]
+enabled = true
+
+[permissions.portfolio.network.unix_sockets]
+"/run/user/1000/docker.sock" = "allow"

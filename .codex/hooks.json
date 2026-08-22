@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat \"$(git rev-parse --show-toplevel)/.codex/project.json\"",
+            "command": "sed '1s/^/Project context: /' \"$(git rev-parse --show-toplevel)/.codex/project.json\"",
             "statusMessage": "Carregando contexto do portfólio",
             "additionalContextLimit": 3000
           }
