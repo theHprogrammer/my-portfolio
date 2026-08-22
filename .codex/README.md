@@ -14,9 +14,18 @@ Ele não envia telemetria nem altera arquivos.
 Após qualquer alteração em `hooks.json`, revise e aprove o novo hash com `/hooks`. A execução fica
 desabilitada até essa confirmação de confiança.
 
-O proxy e o perfil permitem somente o socket rootless do Docker em
-`/run/user/1000/docker.sock`, necessário para executar as validações Docker-first. Outros sockets
-Unix permanecem bloqueados. Alterações nessa política entram em vigor em uma nova sessão do Codex.
+## Docker e validações
+
+O sandbox do Codex bloqueia a conexão com o socket rootless em `/run/user/1000/docker.sock`. A
+allowlist em `config.toml` registra esse caminho no `network_proxy` e no perfil `portfolio`, mas
+**não** torna `docker compose` utilizável enquanto o sandbox permanecer ativo. Aprovar o comando
+também não libera o daemon.
+
+Para validações Docker-first use o terminal do host ou Full access na sessão. O guia operacional
+está em [`docs/operacao/validacoes-docker-e-codex.md`](../docs/operacao/validacoes-docker-e-codex.md).
+
+Não adicione rules pessoais que façam `allow` automático de `docker compose`: isso só esconde o
+prompt e mantém a falha no socket.
 
 O diretório `.git/` recebe escrita dentro deste workspace para permitir operações solicitadas como
 pull, criação de branches e commits. Essa exceção não libera outros repositórios nem remove as

@@ -40,6 +40,10 @@ O Studio local fica disponível em `http://localhost:3333`; a versão publicada 
 
 ## Validação
 
+Os comandos canônicos rodam no terminal do host. O sandbox do Codex não alcança o socket rootless
+do Docker; veja [Validações Docker e Codex](./validacoes-docker-e-codex.md) para Full access e o
+fluxo fora do Codex.
+
 ```bash
 docker compose run --rm app npm run format:check
 docker compose run --rm app npm run lint

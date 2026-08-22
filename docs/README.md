@@ -16,6 +16,7 @@ Os documentos usam nomes em português, minúsculos e em `kebab-case`. `README.m
 
 - [Visão geral da arquitetura](./arquitetura/visao-geral.md)
 - [Configuração local](./operacao/configuracao-local.md)
+- [Validações Docker e Codex](./operacao/validacoes-docker-e-codex.md)
 - [Desenvolvimento orientado a especificação](./processos/desenvolvimento-orientado-a-especificacao.md)
 - [Automação e segurança](./qualidade/automacao-e-seguranca.md)
 
