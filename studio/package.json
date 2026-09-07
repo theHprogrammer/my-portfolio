@@ -9,7 +9,7 @@
     "seed": "sanity exec scripts/seed.ts --with-user-token"
   },
   "dependencies": {
-    "@sanity/vision": "^6.9.2",
+    "@sanity/vision": "^6.12.0",
     "react": "^19.2.2",
     "react-dom": "^19.2.2",
     "sanity": "^6.9.2",
